@@ -5,10 +5,12 @@
     "keywords": ["etl", "extract", "transform", "load"],
     "prefer-stable": true,
     "require": {
-        "php": "~8.1",
-        "flow-php/array-dot": "^1.0@dev",
+        "php": ">=7.4",
+        "ext-json": "*",
         "ext-mbstring": "*",
-        "ext-json": "*"
+        "flow-php/array-dot": "dev-php7.4-backport",
+        "symfony/polyfill-php80": "^1.26",
+        "symfony/polyfill-php81": "^1.26"
     },
     "require-dev": {
         "jawira/case-converter": "^3.4",
@@ -63,5 +65,11 @@
         "post-update-cmd": [
             "@tools:install"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/antiloopgmbh/flow-array-dot"
+        }
+    ]
 }
