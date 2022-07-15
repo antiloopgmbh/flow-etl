@@ -30,10 +30,14 @@ use Flow\ETL\Transformer\RemoveEntriesTransformer;
 final class DataFrame
 {
     private ?GroupBy $groupBy;
+    private Pipeline $pipeline;
+    private Config $configuration;
 
-    public function __construct(private Pipeline $pipeline, private readonly Config $configuration)
+    public function __construct(Pipeline $pipeline, Config $configuration)
     {
         $this->groupBy = null;
+        $this->pipeline = $pipeline;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -94,8 +98,12 @@ final class DataFrame
      *
      * @throws InvalidArgumentException
      */
-    public function display(int $limit = 20, int|bool $truncate = 20, Formatter $formatter = new AsciiTableFormatter()) : string
+    public function display(int $limit = 20, $truncate = 20, Formatter $formatter = null) : string
     {
+        if ($formatter === null) {
+            $formatter = new AsciiTableFormatter();
+        }
+
         return $formatter->format($this->fetch($limit), $truncate);
     }
 
@@ -153,7 +161,7 @@ final class DataFrame
     /**
      * @psalm-param "left"|"right"|"inner"|Join $type
      */
-    public function join(self $dataFrame, Condition $on, string|Join $type = Join::left) : self
+    public function join(self $dataFrame, Condition $on, $type = Join::left) : self
     {
         if ($type instanceof Join) {
             $type = $type->name;
@@ -169,7 +177,7 @@ final class DataFrame
     /**
      * @psalm-param "left"|"right"|"inner"|Join $type
      */
-    public function joinEach(DataFrameFactory $factory, Condition $on, string|Join $type = Join::left) : self
+    public function joinEach(DataFrameFactory $factory, Condition $on, $type = Join::left) : self
     {
         if ($type instanceof Join) {
             $type = $type->name;
@@ -247,7 +255,7 @@ final class DataFrame
     /**
      * Alias for ETL::transform method.
      */
-    public function rows(Transformer|Transformation $transformer) : self
+    public function rows($transformer) : self
     {
         return $this->transform($transformer);
     }
@@ -283,7 +291,7 @@ final class DataFrame
         return $this;
     }
 
-    public function transform(Transformer|Transformation $transformer) : self
+    public function transform($transformer) : self
     {
         if ($transformer instanceof Transformer) {
             $this->pipeline->add($transformer);

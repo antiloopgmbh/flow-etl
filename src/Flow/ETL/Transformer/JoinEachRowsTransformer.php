@@ -16,11 +16,18 @@ use Flow\ETL\Transformer;
  */
 final class JoinEachRowsTransformer implements Transformer
 {
+    private DataFrameFactory $factory;
+    private Condition $condition;
+    private Join $type;
+
     private function __construct(
-        private readonly DataFrameFactory $factory,
-        private readonly Condition $condition,
-        private readonly Join $type
+        DataFrameFactory $factory,
+        Condition $condition,
+        Join $type
     ) {
+        $this->factory = $factory;
+        $this->condition = $condition;
+        $this->type = $type;
     }
 
     /**
@@ -70,10 +77,13 @@ final class JoinEachRowsTransformer implements Transformer
      */
     public function transform(Rows $rows) : Rows
     {
-        return match ($this->type) {
-            Join::left => $rows->joinLeft($this->factory->from($rows)->fetch(), $this->condition),
-            Join::right => $rows->joinRight($this->factory->from($rows)->fetch(), $this->condition),
-            default => $rows->joinInner($this->factory->from($rows)->fetch(), $this->condition),
-        };
+         switch ($this->type) {
+             case Join::left:
+                 return $rows->joinLeft($this->factory->from($rows)->fetch(), $this->condition);
+             case Join::right:
+                 return $rows->joinRight($this->factory->from($rows)->fetch(), $this->condition);
+             default:
+                 return $rows->joinInner($this->factory->from($rows)->fetch(), $this->condition);
+         }
     }
 }

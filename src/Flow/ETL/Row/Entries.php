@@ -243,7 +243,7 @@ final class Entries implements \ArrayAccess, \Countable, \IteratorAggregate, Ser
         throw new InvalidArgumentException("Entry {$offset} does not exists.");
     }
 
-    public function offsetSet(mixed $offset, mixed $value) : void
+    public function offsetSet($offset, $value) : void
     {
         throw new RuntimeException('In order to add new rows use Entries::add(Entry $entry) : self');
     }
@@ -255,7 +255,7 @@ final class Entries implements \ArrayAccess, \Countable, \IteratorAggregate, Ser
      *
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
-    public function offsetUnset(mixed $offset) : void
+    public function offsetUnset($offset) : void
     {
         throw new RuntimeException('In order to add new rows use Entries::remove(string $name) : self');
     }

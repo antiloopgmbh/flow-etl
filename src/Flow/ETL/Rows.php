@@ -27,7 +27,7 @@ final class Rows implements \ArrayAccess, \Countable, \IteratorAggregate, Serial
     /**
      * @var array<int, Row>
      */
-    private readonly array $rows;
+    private array $rows;
 
     public function __construct(Row ...$rows)
     {
@@ -458,7 +458,7 @@ final class Rows implements \ArrayAccess, \Countable, \IteratorAggregate, Serial
         throw new InvalidArgumentException("Row {$offset} does not exists.");
     }
 
-    public function offsetSet(mixed $offset, mixed $value) : void
+    public function offsetSet($offset, $value) : void
     {
         throw new RuntimeException('In order to add new rows use Rows::add(Row $row) : self');
     }
@@ -470,7 +470,7 @@ final class Rows implements \ArrayAccess, \Countable, \IteratorAggregate, Serial
      *
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
-    public function offsetUnset(mixed $offset) : void
+    public function offsetUnset($offset) : void
     {
         throw new RuntimeException('In order to add new rows use Rows::remove(int $offset) : self');
     }
@@ -647,8 +647,12 @@ final class Rows implements \ArrayAccess, \Countable, \IteratorAggregate, Serial
         return $array;
     }
 
-    public function unique(Comparator $comparator = new NativeComparator()) : self
+    public function unique(Comparator $comparator = null) : self
     {
+        if ($comparator === null) {
+            $comparator = new NativeComparator();
+        }
+
         /**
          * @var Row[] $uniqueRows
          */

@@ -14,10 +14,16 @@ use Flow\Serializer\Serializable;
 final class Pipes implements Serializable
 {
     /**
+     * @var Loader[]|Transformer[]
+     */
+    private array $pipes;
+
+    /**
      * @param array<int, Loader|Transformer> $pipes
      */
-    public function __construct(private array $pipes)
+    public function __construct(array $pipes)
     {
+        $this->pipes = $pipes;
     }
 
     public static function empty() : self
@@ -37,7 +43,7 @@ final class Pipes implements Serializable
         $this->pipes = $data['pipes'];
     }
 
-    public function add(Loader|Transformer $pipe) : void
+    public function add($pipe) : void
     {
         $this->pipes[] = $pipe;
     }

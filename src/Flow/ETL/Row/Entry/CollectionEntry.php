@@ -19,18 +19,20 @@ final class CollectionEntry implements \Stringable, Entry
     /**
      * @var array<Entries>
      */
-    private readonly array $entries;
+    private array $entries;
+    private string $name;
 
     /**
      * @throws InvalidArgumentException
      */
-    public function __construct(private readonly string $name, Entries ...$entries)
+    public function __construct(string $name, Entries ...$entries)
     {
         if ('' === $name) {
             throw InvalidArgumentException::because('Entry name cannot be empty');
         }
 
         $this->entries = $entries;
+        $this->name = $name;
     }
 
     public function __serialize() : array

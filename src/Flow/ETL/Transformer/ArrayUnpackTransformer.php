@@ -17,15 +17,31 @@ use Flow\ETL\Transformer;
  */
 final class ArrayUnpackTransformer implements Transformer
 {
+    private string $arrayEntryName;
+    /**
+     * @var string[]
+     */
+    private array $skipEntryNames;
+    private ?string $entryPrefix;
+    private ?EntryFactory $entryFactory;
+
     /**
      * @param string[] $skipEntryNames
      */
     public function __construct(
-        private readonly string $arrayEntryName,
-        private readonly array $skipEntryNames = [],
-        private readonly ?string $entryPrefix = null,
-        private readonly EntryFactory $entryFactory = new NativeEntryFactory()
+        string $arrayEntryName,
+        array $skipEntryNames = [],
+        ?string $entryPrefix = null,
+        EntryFactory $entryFactory = null
     ) {
+        if ($entryFactory === null) {
+            $entryFactory = new NativeEntryFactory();
+        }
+
+        $this->arrayEntryName = $arrayEntryName;
+        $this->skipEntryNames = $skipEntryNames;
+        $this->entryPrefix = $entryPrefix;
+        $this->entryFactory = $entryFactory;
     }
 
     public function __serialize() : array

@@ -120,7 +120,7 @@ class Transform
         return new Transformer\StaticEntryTransformer(DSLEntry::string($name, $value));
     }
 
-    final public static function add_value(string $left_entry, int|float $value, string $new_entry_name = null) : Transformer
+    final public static function add_value(string $left_entry, $value, string $new_entry_name = null) : Transformer
     {
         return MathValueOperationTransformer::add($left_entry, $value, $new_entry_name ?? $left_entry);
     }
@@ -285,7 +285,7 @@ class Transform
         return MathOperationTransformer::divide($left_entry, $right_entry, $new_entry_name ?? $left_entry);
     }
 
-    final public static function divide_by(string $left_entry, int|float $value, string $new_entry_name = null) : Transformer
+    final public static function divide_by(string $left_entry, $value, string $new_entry_name = null) : Transformer
     {
         return MathValueOperationTransformer::divide($left_entry, $value, $new_entry_name ?? $left_entry);
     }
@@ -370,7 +370,7 @@ class Transform
      *
      * @throws \Flow\ETL\Exception\InvalidArgumentException
      */
-    final public static function hash(string|array $entry, string $algorithm = null, string $new_entry_name = 'hash') : Transformer
+    final public static function hash( $entry, string $algorithm = null, string $new_entry_name = 'hash') : Transformer
     {
         return new Transformer\HashTransformer(
             \is_string($entry) ? [$entry] : $entry,
@@ -394,7 +394,7 @@ class Transform
         return MathOperationTransformer::modulo($left_entry, $right_entry, $new_entry_name ?? $left_entry);
     }
 
-    final public static function modulo_by(string $left_entry, int|float $value, string $new_entry_name = null) : Transformer
+    final public static function modulo_by(string $left_entry, $value, string $new_entry_name = null) : Transformer
     {
         return MathValueOperationTransformer::modulo($left_entry, $value, $new_entry_name ?? $left_entry);
     }
@@ -404,7 +404,7 @@ class Transform
         return MathOperationTransformer::multiply($left_entry, $right_entry, $new_entry_name ?? $left_entry);
     }
 
-    final public static function multiply_by(string $left_entry, int|float $value, string $new_entry_name = null) : Transformer
+    final public static function multiply_by(string $left_entry, $value, string $new_entry_name = null) : Transformer
     {
         return MathValueOperationTransformer::multiply($left_entry, $value, $new_entry_name ?? $left_entry);
     }
@@ -414,7 +414,7 @@ class Transform
      *
      * @throws \Flow\ETL\Exception\InvalidArgumentException
      */
-    final public static function murmur3(string|array $entry, string $new_entry_name = 'hash') : Transformer
+    final public static function murmur3($entry, string $new_entry_name = 'hash') : Transformer
     {
         return new Transformer\HashTransformer(
             \is_string($entry) ? [$entry] : $entry,
@@ -436,7 +436,7 @@ class Transform
         return MathOperationTransformer::power($left_entry, $right_entry, $new_entry_name ?? $left_entry);
     }
 
-    final public static function power_of(string $left_entry, int|float $value, string $new_entry_name = null) : Transformer
+    final public static function power_of(string $left_entry, $value, string $new_entry_name = null) : Transformer
     {
         return MathValueOperationTransformer::power($left_entry, $value, $new_entry_name ?? $left_entry);
     }
@@ -454,7 +454,7 @@ class Transform
      *
      * @return Transformer
      */
-    final public static function preg_replace(string $entry, string|array $pattern, string|array $replacement, int $limit = -1) : Transformer
+    final public static function preg_replace(string $entry, $pattern, $replacement, int $limit = -1) : Transformer
     {
         return self::user_function([$entry], 'preg_replace', ['pattern' => $pattern, 'replacement' => $replacement, 'limit' => $limit], 'subject');
     }
@@ -484,7 +484,7 @@ class Transform
      *
      * @throws \Flow\ETL\Exception\InvalidArgumentException
      */
-    final public static function sha256(string|array $entry, string $new_entry_name = 'hash') : Transformer
+    final public static function sha256($entry, string $new_entry_name = 'hash') : Transformer
     {
         return new Transformer\HashTransformer(
             \is_string($entry) ? [$entry] : $entry,
@@ -505,7 +505,7 @@ class Transform
      *
      * @return Transformer
      */
-    final public static function str_replace(string $entry, string|array $search, string|array $replace) : Transformer
+    final public static function str_replace(string $entry, $search, $replace) : Transformer
     {
         return self::user_function($entry, 'str_replace', ['search' => $search, 'replace' => $replace], 'subject');
     }
@@ -538,7 +538,7 @@ class Transform
         return MathOperationTransformer::subtract($left_entry, $right_entry, $new_entry_name ?? $left_entry);
     }
 
-    final public static function subtract_value(string $left_entry, int|float $value, string $new_entry_name = null) : Transformer
+    final public static function subtract_value(string $left_entry, $value, string $new_entry_name = null) : Transformer
     {
         return MathValueOperationTransformer::subtract($left_entry, $value, $new_entry_name ?? $left_entry);
     }
@@ -570,7 +570,7 @@ class Transform
     /**
      * @param array<string>|string $entry
      */
-    final public static function to_datetime(string|array $entry, ?string $timezone = null, ?string $to_timezone = null) : Transformer
+    final public static function to_datetime($entry, ?string $timezone = null, ?string $to_timezone = null) : Transformer
     {
         return new CastTransformer(CastToDateTime::nullable(\is_string($entry) ? [$entry] : $entry, $timezone, $to_timezone));
     }
@@ -578,7 +578,7 @@ class Transform
     /**
      * @param array<string>|string $entry
      */
-    final public static function to_datetime_from_string(string|array $entry, ?string $tz = null, ?string $to_tz = null) : Transformer
+    final public static function to_datetime_from_string($entry, ?string $tz = null, ?string $to_tz = null) : Transformer
     {
         return new CastTransformer(new Transformer\Cast\CastEntries(\is_string($entry) ? [$entry] : $entry, new StringToDateTimeEntryCaster($tz, $to_tz), true));
     }
@@ -702,7 +702,7 @@ class Transform
      *
      * @return Transformer
      */
-    final public static function user_function(array|string $entry, callable $callback, array $extra_arguments = [], string $value_argument_name = null) : Transformer
+    final public static function user_function($entry, callable $callback, array $extra_arguments = [], string $value_argument_name = null) : Transformer
     {
         return new Transformer\CallUserFunctionTransformer(\is_string($entry) ? [$entry] : $entry, $callback, $extra_arguments, $value_argument_name);
     }

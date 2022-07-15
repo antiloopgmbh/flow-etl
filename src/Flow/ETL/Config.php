@@ -14,14 +14,24 @@ final class Config
     public const EXTERNAL_SORT_MAX_MEMORY_ENV = 'FLOW_EXTERNAL_SORT_MAX_MEMORY';
 
     private ?int $limit = null;
+    private string $id;
+    private Cache $cache;
+    private ExternalSort $externalSort;
+    private Serializer $serializer;
+    private ErrorHandler $errorHandler;
 
     public function __construct(
-        private string $id,
-        private Cache $cache,
-        private ExternalSort $externalSort,
-        private Serializer $serializer,
-        private ErrorHandler $errorHandler
+        string $id,
+        Cache $cache,
+        ExternalSort $externalSort,
+        Serializer $serializer,
+        ErrorHandler $errorHandler
     ) {
+        $this->id = $id;
+        $this->cache = $cache;
+        $this->externalSort = $externalSort;
+        $this->serializer = $serializer;
+        $this->errorHandler = $errorHandler;
     }
 
     public static function builder() : ConfigBuilder

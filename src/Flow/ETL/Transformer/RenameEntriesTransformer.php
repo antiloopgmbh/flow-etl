@@ -17,7 +17,7 @@ final class RenameEntriesTransformer implements Transformer
     /**
      * @var Rename\EntryRename[]
      */
-    private readonly array $entryRenames;
+    private array $entryRenames;
 
     public function __construct(Transformer\Rename\EntryRename ...$entryRenames)
     {

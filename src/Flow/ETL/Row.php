@@ -16,8 +16,11 @@ use Flow\Serializer\Serializable;
  */
 final class Row implements Serializable
 {
-    public function __construct(private readonly Entries $entries)
+    private Entries $entries;
+
+    public function __construct(Entries $entries)
     {
+        $this->entries = $entries;
     }
 
     /**

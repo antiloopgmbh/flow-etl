@@ -15,13 +15,18 @@ use Flow\Serializer\Serializer;
  */
 final class LocalFilesystemCache implements Cache
 {
+    private string $path;
+    private Serializer $serializer;
+
     public function __construct(
-        private readonly string $path,
-        private readonly Serializer $serializer
+        string $path,
+        Serializer $serializer
     ) {
         if (!\file_exists($path) || !\is_dir($path)) {
             throw new InvalidArgumentException("Given cache path does not exists or it's not a directory: {$path}");
         }
+        $this->path = $path;
+        $this->serializer = $serializer;
     }
 
     public function __serialize() : array

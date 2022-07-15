@@ -9,7 +9,7 @@ namespace Flow\ETL;
  */
 interface Pipeline
 {
-    public function add(Loader|Transformer $pipe) : self;
+    public function add($pipe) : self;
 
     /**
      * Create clean instance of pipeline, with empty pipes and without source.

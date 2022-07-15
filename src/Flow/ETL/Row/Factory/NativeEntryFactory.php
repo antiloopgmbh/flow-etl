@@ -18,9 +18,11 @@ use Flow\ETL\Row\Schema;
 final class NativeEntryFactory implements EntryFactory
 {
     private const JSON_DEPTH = 512;
+    private ?Schema $schema;
 
-    public function __construct(private readonly ?Schema $schema = null)
+    public function __construct(?Schema $schema = null)
     {
+        $this->schema = $schema;
     }
 
     public function __serialize() : array
@@ -41,7 +43,7 @@ final class NativeEntryFactory implements EntryFactory
      * @throws InvalidArgumentException
      * @throws \JsonException
      */
-    public function create(string $entryName, mixed $value) : Entry
+    public function create(string $entryName, $value) : Entry
     {
         if ($this->schema !== null && $this->schema->findDefinition($entryName) !== null) {
             /**
@@ -232,7 +234,7 @@ final class NativeEntryFactory implements EntryFactory
                         $value
                     );
                 } catch (InvalidArgumentException $e) {
-                    throw new InvalidArgumentException("Field \"{$definition->entry()}\" conversion exception. {$e->getMessage()}", previous: $e);
+                    throw new InvalidArgumentException("Field \"{$definition->entry()}\" conversion exception. {$e->getMessage()}", 0, $e);
                 }
             }
         }
@@ -258,7 +260,7 @@ final class NativeEntryFactory implements EntryFactory
     {
         try {
             return \is_array(\json_decode($string, true, self::JSON_DEPTH, JSON_THROW_ON_ERROR));
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return false;
         }
     }

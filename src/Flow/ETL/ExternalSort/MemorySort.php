@@ -24,12 +24,14 @@ use Flow\ETL\Rows;
  */
 final class MemorySort implements ExternalSort
 {
-    private readonly Configuration $configuration;
+    private Configuration $configuration;
+    private string $cacheId;
+    private Cache $cache;
 
     public function __construct(
-        private readonly string $cacheId,
-        private readonly Cache $cache,
-        private Unit $maximumMemory
+        string $cacheId,
+        Cache $cache,
+        Unit $maximumMemory
     ) {
         $this->configuration = new Configuration($safetyBufferPercentage = 10);
 
@@ -40,6 +42,9 @@ final class MemorySort implements ExternalSort
              */
             $this->maximumMemory = $this->configuration->limit()->percentage(90);
         }
+        $this->cacheId = $cacheId;
+        $this->cache = $cache;
+        $this->maximumMemory = $maximumMemory;
     }
 
     public function sortBy(Sort ...$entries) : Extractor

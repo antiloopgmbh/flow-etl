@@ -16,7 +16,7 @@ final class SynchronousPipeline implements Pipeline
 {
     private Extractor $extractor;
 
-    private readonly Pipes $pipes;
+    private Pipes $pipes;
 
     public function __construct()
     {
@@ -24,7 +24,7 @@ final class SynchronousPipeline implements Pipeline
         $this->extractor = From::rows(new Rows());
     }
 
-    public function add(Loader|Transformer $pipe) : self
+    public function add($pipe) : self
     {
         $this->pipes->add($pipe);
 

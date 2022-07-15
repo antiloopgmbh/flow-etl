@@ -8,8 +8,11 @@ use Flow\ETL\Exception\InvalidArgumentException;
 
 final class Unit
 {
-    private function __construct(private readonly int $bytes)
+    private int $bytes;
+
+    private function __construct(int $bytes)
     {
+        $this->bytes = $bytes;
     }
 
     public static function fromBytes(int $bytes) : self

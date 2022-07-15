@@ -9,8 +9,15 @@ use Flow\ETL\Pipeline\SynchronousPipeline;
 
 final class Flow
 {
-    public function __construct(private readonly ConfigBuilder $configBuilder = new ConfigBuilder())
+    private ?ConfigBuilder $configBuilder;
+
+    public function __construct(ConfigBuilder $configBuilder = null)
     {
+        if ($configBuilder === null) {
+            $configBuilder = new ConfigBuilder();
+        }
+
+        $this->configBuilder = $configBuilder;
     }
 
     public static function setUp(ConfigBuilder $configBuilder) : self

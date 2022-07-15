@@ -18,12 +18,25 @@ use Flow\ETL\Transformer;
  */
 final class ArrayDotGetTransformer implements Transformer
 {
+    private string $arrayEntryName;
+    private string $path;
+    private string $newEntryName;
+    private ?EntryFactory $entryFactory;
+
     public function __construct(
-        private readonly string $arrayEntryName,
-        private readonly string $path,
-        private readonly string $newEntryName = 'element',
-        private readonly EntryFactory $entryFactory = new NativeEntryFactory()
+        string $arrayEntryName,
+        string $path,
+        string $newEntryName = 'element',
+        EntryFactory $entryFactory = null
     ) {
+        if ($entryFactory === null) {
+            $entryFactory = new NativeEntryFactory();
+        }
+
+        $this->arrayEntryName = $arrayEntryName;
+        $this->path = $path;
+        $this->newEntryName = $newEntryName;
+        $this->entryFactory = $entryFactory;
     }
 
     public function __serialize() : array
@@ -53,7 +66,7 @@ final class ArrayDotGetTransformer implements Transformer
             $arrayEntry = $row->get($this->arrayEntryName);
 
             if (!$arrayEntry instanceof Row\Entry\ArrayEntry) {
-                $entryClass = $arrayEntry::class;
+                $entryClass = get_class($arrayEntry);
 
                 throw new RuntimeException("{$this->arrayEntryName} is not ArrayEntry but {$entryClass}");
             }

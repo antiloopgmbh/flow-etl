@@ -16,12 +16,20 @@ use Flow\Serializer\Serializable;
 final class Condition implements Serializable
 {
     /**
+     * @var string[]
+     */
+    private array $entries;
+    private string $joinPrefix;
+
+    /**
      * @param array<string, string> $entries
      */
     private function __construct(
-        private array $entries,
-        private string $joinPrefix = ''
+        array $entries,
+        string $joinPrefix = ''
     ) {
+        $this->entries = $entries;
+        $this->joinPrefix = $joinPrefix;
     }
 
     /**
@@ -61,7 +69,7 @@ final class Condition implements Serializable
                 if ($left->valueOf($leftEntry) !== $right->valueOf($rightEntry)) {
                     return false;
                 }
-            } catch (InvalidArgumentException) {
+            } catch (InvalidArgumentException $exception) {
                 return false;
             }
         }

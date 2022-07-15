@@ -15,18 +15,26 @@ use Flow\ETL\Row\Schema\Definition;
  */
 final class ArrayEntry implements \Stringable, Entry
 {
+    private string $name;
+    /**
+     * @var mixed[]
+     */
+    private array $value;
+
     /**
      * @param array<mixed> $value
      *
      * @throws InvalidArgumentException
      */
     public function __construct(
-        private readonly string $name,
-        private readonly array $value
+        string $name,
+        array $value
     ) {
         if (!\strlen($name)) {
             throw InvalidArgumentException::because('Entry name cannot be empty');
         }
+        $this->name = $name;
+        $this->value = $value;
     }
 
     public function __serialize() : array
