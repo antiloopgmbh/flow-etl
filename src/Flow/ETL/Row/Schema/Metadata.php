@@ -38,7 +38,7 @@ final class Metadata implements Serializable
      *
      * @return $this
      */
-    public static function with(string $key, int|string|bool|float|object|array $value) : self
+    public static function with(string $key, $value) : self
     {
         return new self([$key => $value]);
     }
@@ -61,7 +61,7 @@ final class Metadata implements Serializable
      *
      * @return $this
      */
-    public function add(string $key, int|string|bool|float|object|array $value) : self
+    public function add(string $key, $value) : self
     {
         return new self(\array_merge($this->map, [$key => $value]));
     }
@@ -73,7 +73,7 @@ final class Metadata implements Serializable
      *
      * @return array<mixed>|bool|float|int|object|string
      */
-    public function get(string $key) : int|string|bool|float|object|array
+    public function get(string $key)
     {
         if (!\array_key_exists($key, $this->map)) {
             throw new InvalidArgumentException("There no is key: {$key}");

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Join;
 
-enum Join
+interface Join
 {
-    case inner;
-    case left;
-    case right;
+    public const inner = 'inner';
+    public const left = 'left';
+    public const right = 'right';
 }

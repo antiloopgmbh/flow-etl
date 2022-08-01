@@ -18,16 +18,16 @@ final class JoinEachRowsTransformer implements Transformer
 {
     private DataFrameFactory $factory;
     private Condition $condition;
-    private Join $type;
+    private string $type;
 
     private function __construct(
         DataFrameFactory $factory,
         Condition $condition,
-        Join $type
+        string $joinType
     ) {
         $this->factory = $factory;
         $this->condition = $condition;
-        $this->type = $type;
+        $this->type = $joinType;
     }
 
     /**

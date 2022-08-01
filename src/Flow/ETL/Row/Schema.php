@@ -17,7 +17,7 @@ final class Schema implements \Countable, Serializable
     /**
      * @var array<string, Definition>
      */
-    private readonly array $definitions;
+    private array $definitions;
 
     public function __construct(Definition ...$definitions)
     {

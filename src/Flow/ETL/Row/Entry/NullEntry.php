@@ -14,14 +14,17 @@ use Flow\ETL\Row\Schema\Definition;
  */
 final class NullEntry implements \Stringable, Entry
 {
+    private string $name;
+
     /**
      * @throws InvalidArgumentException
      */
-    public function __construct(private readonly string $name)
+    public function __construct(string $name)
     {
         if (!\strlen($name)) {
             throw InvalidArgumentException::because('Entry name cannot be empty');
         }
+        $this->name = $name;
     }
 
     public function __serialize() : array

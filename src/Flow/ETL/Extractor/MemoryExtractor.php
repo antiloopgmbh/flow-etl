@@ -15,6 +15,9 @@ use Flow\ETL\Rows;
 final class MemoryExtractor implements Extractor
 {
     private const CHUNK_SIZE = 100;
+    private Memory $memory;
+    private int $chunkSize;
+    private string $rowEntryName;
 
     /**
      * @param Memory $memory
@@ -22,10 +25,13 @@ final class MemoryExtractor implements Extractor
      * @param string $rowEntryName
      */
     public function __construct(
-        private readonly Memory $memory,
-        private readonly int $chunkSize = self::CHUNK_SIZE,
-        private readonly string $rowEntryName = 'row'
+        Memory $memory,
+        int $chunkSize = self::CHUNK_SIZE,
+        string $rowEntryName = 'row'
     ) {
+        $this->memory = $memory;
+        $this->chunkSize = $chunkSize;
+        $this->rowEntryName = $rowEntryName;
     }
 
     public function extract() : \Generator

@@ -17,7 +17,7 @@ final class RemoveEntriesTransformer implements Transformer
     /**
      * @var string[]
      */
-    private readonly array $names;
+    private array $names;
 
     public function __construct(string ...$names)
     {

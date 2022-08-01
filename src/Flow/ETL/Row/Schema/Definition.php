@@ -38,13 +38,18 @@ final class Definition implements Serializable
     private Constraint $constraint;
 
     private Metadata $metadata;
+    private string $entry;
+    /**
+     * @var string[]
+     */
+    private array $classes;
 
     /**
      * @param array<class-string<Entry>> $classes
      */
     public function __construct(
-        private readonly string $entry,
-        private readonly array $classes,
+        string $entry,
+        array $classes,
         ?Constraint $constraint = null,
         ?Metadata $metadata = null
     ) {
@@ -54,6 +59,8 @@ final class Definition implements Serializable
 
         $this->metadata = $metadata ?? Metadata::empty();
         $this->constraint = $constraint ?? new VoidConstraint();
+        $this->entry = $entry;
+        $this->classes = $classes;
     }
 
     /**
