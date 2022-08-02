@@ -304,7 +304,7 @@ class Transform
         return self::user_function($entry, 'explode', ['separator' => $separator], 'string');
     }
 
-    final public static function filter_equals(string $entry, mixed $value) : Transformer
+    final public static function filter_equals(string $entry, $value) : Transformer
     {
         return new FilterRowsTransformer(new EntryEqualsTo($entry, $value));
     }
@@ -319,7 +319,7 @@ class Transform
         return new FilterRowsTransformer(new ValidValue($entry, new ValidValue\SymfonyValidator($constraints)));
     }
 
-    final public static function filter_not_equals(string $entry, mixed $value) : Transformer
+    final public static function filter_not_equals(string $entry, $value) : Transformer
     {
         return new FilterRowsTransformer(new Opposite(new EntryEqualsTo($entry, $value)));
     }

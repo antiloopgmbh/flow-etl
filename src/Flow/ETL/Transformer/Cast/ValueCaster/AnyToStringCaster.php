@@ -21,7 +21,12 @@ final class AnyToStringCaster implements ValueConverter
     {
     }
 
-    public function convert(mixed $value) : string
+    /**
+     * @param mixed $value
+     *
+     * @return string
+     */
+    public function convert($value) : string
     {
         /** @phpstan-ignore-next-line */
         return (string) $value;

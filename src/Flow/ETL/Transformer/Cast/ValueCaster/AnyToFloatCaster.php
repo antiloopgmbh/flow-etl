@@ -21,7 +21,12 @@ final class AnyToFloatCaster implements ValueConverter
     {
     }
 
-    public function convert(mixed $value) : float
+    /**
+     * @param mixed $value
+     *
+     * @return float
+     */
+    public function convert($value) : float
     {
         /** @phpstan-ignore-next-line */
         return (float) $value;

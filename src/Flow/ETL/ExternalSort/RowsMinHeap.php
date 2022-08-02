@@ -31,8 +31,15 @@ final class RowsMinHeap extends \SplMinHeap
         return parent::extract();
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return void
+     *
+     * @throws InvalidArgumentException
+     */
     #[\ReturnTypeWillChange]
-    public function insert(mixed $value) : void
+    public function insert($value) : void
     {
         if (!$value instanceof CachedRow) {
             throw new InvalidArgumentException('Value inserted into RowsMinHeap must be an instance of Flow\\ETL\\ExternalSort\\CachedRow');

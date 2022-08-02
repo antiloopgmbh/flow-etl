@@ -40,7 +40,7 @@ interface StreamWrapper
 
     public function stream_lock(int $operation) : bool;
 
-    public function stream_metadata(string $path, int $option, mixed $value) : bool;
+    public function stream_metadata(string $path, int $option, $value) : bool;
 
     public function stream_open(string $path, string $mode, int $options, ?string &$opened_path) : bool;
 

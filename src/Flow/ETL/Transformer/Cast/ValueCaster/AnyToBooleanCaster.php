@@ -21,7 +21,12 @@ final class AnyToBooleanCaster implements ValueConverter
     {
     }
 
-    public function convert(mixed $value) : bool
+    /**
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    public function convert($value) : bool
     {
         if (\is_string($value)) {
             if (\trim(\strtolower($value)) === 'true') {

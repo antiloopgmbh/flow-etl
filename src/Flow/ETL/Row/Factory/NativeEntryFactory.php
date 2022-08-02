@@ -11,6 +11,7 @@ use Flow\ETL\Row\Entry;
 use Flow\ETL\Row\Entry\TypedCollection\Type;
 use Flow\ETL\Row\EntryFactory;
 use Flow\ETL\Row\Schema;
+use Flow\ETL\Row\Schema\Definition;
 
 /**
  * @implements EntryFactory<array{schema: ?Schema}>
@@ -136,7 +137,15 @@ final class NativeEntryFactory implements EntryFactory
         throw new InvalidArgumentException("{$type} can't be converted to any known Entry");
     }
 
-    private function fromDefinition(Schema\Definition $definition, mixed $value) : Entry
+    /**
+     * @param Definition $definition
+     * @param mixed $value
+     *
+     * @return Entry
+     *
+     * @throws InvalidArgumentException
+     */
+    private function fromDefinition(Schema\Definition $definition, $value) : Entry
     {
         if ($definition->isNullable() && null === $value) {
             return EntryDSL::null($definition->entry());

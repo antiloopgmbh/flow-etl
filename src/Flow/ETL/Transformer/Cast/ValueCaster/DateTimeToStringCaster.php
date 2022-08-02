@@ -29,7 +29,14 @@ final class DateTimeToStringCaster implements ValueConverter
         $this->format = $data['format'];
     }
 
-    public function convert(mixed $value) : string
+    /**
+     * @param mixed $value
+     *
+     * @return string
+     *
+     * @throws InvalidArgumentException
+     */
+    public function convert($value) : string
     {
         if (!$value instanceof \DateTimeInterface) {
             throw new InvalidArgumentException('Only \DateTimeInterface can be casted to string, got ' . \gettype($value));

@@ -12,7 +12,7 @@ use Flow\ETL\Row\Schema\Constraint;
  */
 final class SameAs implements Constraint
 {
-    public function __construct(private readonly mixed $value)
+    public function __construct(private readonly $value)
     {
     }
 

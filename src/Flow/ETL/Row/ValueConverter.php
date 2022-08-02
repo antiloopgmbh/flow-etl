@@ -13,6 +13,10 @@ interface ValueConverter extends Serializable
 {
     /**
      * @psalm-pure
+     *
+     * @param mixed $value
+     *
+     * @return mixed
      */
-    public function convert(mixed $value) : mixed;
+    public function convert($value);
 }

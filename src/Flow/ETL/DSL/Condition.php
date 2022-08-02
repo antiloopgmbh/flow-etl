@@ -30,32 +30,32 @@ class Condition
         return new TransformerCondition\ArrayDotExists($entry, $path);
     }
 
-    final public static function array_value_equals(string $entry, string $path, mixed $value, bool $identical = true) : RowCondition
+    final public static function array_value_equals(string $entry, string $path, $value, bool $identical = true) : RowCondition
     {
         return new TransformerCondition\ArrayDotValueEqualsTo($entry, $path, $value, $identical);
     }
 
-    final public static function array_value_greater_or_equal(string $entry, string $path, mixed $value) : RowCondition
+    final public static function array_value_greater_or_equal(string $entry, string $path, $value) : RowCondition
     {
         return new TransformerCondition\ArrayDotValueGreaterOrEqualThan($entry, $path, $value);
     }
 
-    final public static function array_value_greater_than(string $entry, string $path, mixed $value) : RowCondition
+    final public static function array_value_greater_than(string $entry, string $path, $value) : RowCondition
     {
         return new TransformerCondition\ArrayDotValueGreaterThan($entry, $path, $value);
     }
 
-    final public static function array_value_less_or_equal(string $entry, string $path, mixed $value) : RowCondition
+    final public static function array_value_less_or_equal(string $entry, string $path, $value) : RowCondition
     {
         return new TransformerCondition\ArrayDotValueLessOrEqualThan($entry, $path, $value);
     }
 
-    final public static function array_value_less_than(string $entry, string $path, mixed $value) : RowCondition
+    final public static function array_value_less_than(string $entry, string $path, $value) : RowCondition
     {
         return new TransformerCondition\ArrayDotValueLessThan($entry, $path, $value);
     }
 
-    final public static function equals_to_value(string $entry, mixed $value, bool $identical = true) : RowCondition
+    final public static function equals_to_value(string $entry, $value, bool $identical = true) : RowCondition
     {
         return new TransformerCondition\EntryValueEqualsTo($entry, $value, $identical);
     }
@@ -65,12 +65,12 @@ class Condition
         return new TransformerCondition\EntryExists($entry);
     }
 
-    final public static function greater_or_equals_to_value(string $entry, mixed $value) : RowCondition
+    final public static function greater_or_equals_to_value(string $entry, $value) : RowCondition
     {
         return new TransformerCondition\EntryValueGreaterOrEqualThan($entry, $value);
     }
 
-    final public static function greater_than_value(string $entry, mixed $value) : RowCondition
+    final public static function greater_than_value(string $entry, $value) : RowCondition
     {
         return new TransformerCondition\EntryValueGreaterThan($entry, $value);
     }
@@ -129,12 +129,12 @@ class Condition
         return new TransformerCondition\ValidValue($entry, new TransformerCondition\ValidValue\SymfonyValidator($constraints));
     }
 
-    final public static function less_or_equals_value(string $entry, mixed $value) : RowCondition
+    final public static function less_or_equals_value(string $entry, $value) : RowCondition
     {
         return new TransformerCondition\EntryValueLessOrEqualThan($entry, $value);
     }
 
-    final public static function less_than_value(string $entry, mixed $value) : RowCondition
+    final public static function less_than_value(string $entry, $value) : RowCondition
     {
         return new TransformerCondition\EntryValueLessThan($entry, $value);
     }

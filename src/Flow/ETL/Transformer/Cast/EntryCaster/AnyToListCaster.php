@@ -46,7 +46,7 @@ final class AnyToListCaster implements EntryConverter
             $entry->name(),
             $this->type,
             \array_map(
-                function (mixed $value) : mixed {
+                function ($value) {
                     if ($this->valueConverter !== null) {
                         return $this->valueConverter->convert($value);
                     }

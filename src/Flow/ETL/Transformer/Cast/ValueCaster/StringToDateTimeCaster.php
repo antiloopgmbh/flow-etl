@@ -45,7 +45,14 @@ final class StringToDateTimeCaster implements ValueConverter
         $this->toTimeZone = $data['to_time_zone'];
     }
 
-    public function convert(mixed $value) : \DateTimeImmutable
+    /**
+     * @param mixed $value
+     *
+     * @return \DateTimeImmutable
+     *
+     * @throws InvalidArgumentException
+     */
+    public function convert($value) : \DateTimeImmutable
     {
         if (!\is_string($value)) {
             throw new InvalidArgumentException('Only string can be casted to DateTime, got ' . \gettype($value));

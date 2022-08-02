@@ -25,11 +25,11 @@ final class JsonToArrayCaster implements ValueConverter
     /**
      * @param mixed $value
      *
-     * @throws InvalidArgumentException
-     *
      * @return array<mixed>
+     *
+     * @throws InvalidArgumentException
      */
-    public function convert(mixed $value) : array
+    public function convert($value) : array
     {
         if (!\is_string($value)) {
             throw new InvalidArgumentException('Only json string can be casted to Array, got ' . \gettype($value));

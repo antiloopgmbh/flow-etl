@@ -26,7 +26,12 @@ final class SymfonyValidator implements Validator
         $this->validator = $validator ?: Validation::createValidator();
     }
 
-    public function isValid(mixed $value) : bool
+    /**
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    public function isValid($value) : bool
     {
         return $this->validator->validate($value, $this->constraints)->count() === 0;
     }

@@ -21,7 +21,12 @@ final class AnyToIntegerCaster implements ValueConverter
     {
     }
 
-    public function convert(mixed $value) : int
+    /**
+     * @param mixed $value
+     *
+     * @return int
+     */
+    public function convert($value) : int
     {
         /** @phpstan-ignore-next-line */
         return (int) $value;
