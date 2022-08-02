@@ -229,7 +229,7 @@ final class NativeEntryFactory implements EntryFactory
                         /** @var mixed $firstValue */
                         $firstValue = \current($value);
 
-                        if (\is_a($listType->class, \DateTimeInterface::class, true) && \is_string($firstValue)) {
+                        if (\is_a($listType->getClass(), \DateTimeInterface::class, true) && \is_string($firstValue)) {
                             return new Entry\ListEntry(
                                 $definition->entry(),
                                 $listType,

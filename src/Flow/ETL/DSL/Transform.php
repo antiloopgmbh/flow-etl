@@ -10,6 +10,7 @@ use Flow\ETL\Exception\RuntimeException;
 use Flow\ETL\Row;
 use Flow\ETL\Row\Entries;
 use Flow\ETL\Row\Entry;
+use Flow\ETL\Row\Entry\TypedCollection\ScalarType;
 use Flow\ETL\Row\Factory\NativeEntryFactory;
 use Flow\ETL\Row\Schema;
 use Flow\ETL\Row\ValueConverter;
@@ -598,7 +599,7 @@ class Transform
         return new CastTransformer(
             new Transformer\Cast\CastEntries(
                 [$entry],
-                new AnyToListCaster(Entry\TypedCollection\ScalarType::boolean),
+                new AnyToListCaster(new ScalarType(Entry\TypedCollection\ScalarType::BOOLEAN)),
                 true
             )
         );
@@ -620,7 +621,7 @@ class Transform
         return new CastTransformer(
             new Transformer\Cast\CastEntries(
                 [$entry],
-                new AnyToListCaster(Entry\TypedCollection\ScalarType::float),
+                new AnyToListCaster(new ScalarType(Entry\TypedCollection\ScalarType::FLOAT)),
                 true
             )
         );
@@ -631,7 +632,7 @@ class Transform
         return new CastTransformer(
             new Transformer\Cast\CastEntries(
                 [$entry],
-                new AnyToListCaster(Entry\TypedCollection\ScalarType::integer),
+                new AnyToListCaster(new ScalarType(Entry\TypedCollection\ScalarType::INTEGER)),
                 true
             )
         );
@@ -660,7 +661,7 @@ class Transform
         return new CastTransformer(
             new Transformer\Cast\CastEntries(
                 [$entry],
-                new AnyToListCaster(Entry\TypedCollection\ScalarType::string),
+                new AnyToListCaster(new ScalarType(Entry\TypedCollection\ScalarType::STRING)),
                 true
             )
         );

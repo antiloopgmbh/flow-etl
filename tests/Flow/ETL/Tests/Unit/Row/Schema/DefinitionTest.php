@@ -46,22 +46,22 @@ final class DefinitionTest extends TestCase
 
     public function test_equals_but_different_constraints() : void
     {
-        $def = Definition::list('list', ScalarType::integer);
+        $def = Definition::list('list', new ScalarType(ScalarType::INTEGER));
 
         $this->assertFalse(
             $def->isEqual(
-                Definition::list('list', ScalarType::string)
+                Definition::list('list', new ScalarType(ScalarType::STRING))
             )
         );
     }
 
     public function test_equals_types_and_constraints() : void
     {
-        $def = Definition::list('list', ScalarType::integer);
+        $def = Definition::list('list', new ScalarType(ScalarType::INTEGER));
 
         $this->assertTrue(
             $def->isEqual(
-                Definition::list('list', ScalarType::integer)
+                Definition::list('list', new ScalarType(ScalarType::INTEGER))
             )
         );
     }
@@ -147,10 +147,10 @@ final class DefinitionTest extends TestCase
                 'list',
                 [ListEntry::class, NullEntry::class],
                 null,
-                Metadata::empty()->add(FlowMetadata::METADATA_LIST_ENTRY_TYPE, ScalarType::string)
+                Metadata::empty()->add(FlowMetadata::METADATA_LIST_ENTRY_TYPE, new ScalarType(ScalarType::STRING))
             ),
-            Definition::list('list', ScalarType::integer)
-                ->merge(Definition::list('list', ScalarType::string, true))
+            Definition::list('list', new ScalarType(ScalarType::INTEGER))
+                ->merge(Definition::list('list', new ScalarType(ScalarType::STRING), true))
         );
     }
 

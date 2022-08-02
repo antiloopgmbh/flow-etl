@@ -58,7 +58,7 @@ final class AnyToListCaster implements EntryConverter
                     }
 
                     if ($this->type instanceof ObjectType) {
-                        if (\is_a($this->type->class, \DateTimeInterface::class, true) && \is_string($value)) {
+                        if (\is_a($this->type->getClass(), \DateTimeInterface::class, true) && \is_string($value)) {
                             return (new StringToDateTimeCaster())->convert($value);
                         }
 
@@ -68,14 +68,14 @@ final class AnyToListCaster implements EntryConverter
                     /** @var ScalarType $type */
                     $type = $this->type;
 
-                    switch ($type) {
-                        case ScalarType::integer:
+                    switch ($type->getValue()) {
+                        case ScalarType::INTEGER:
                             return (new AnyToIntegerCaster())->convert($value);
-                        case ScalarType::string:
+                        case ScalarType::STRING:
                             return (new AnyToStringCaster())->convert($value);
-                        case ScalarType::boolean:
+                        case ScalarType::BOOLEAN:
                             return (new AnyToBooleanCaster())->convert($value);
-                        case ScalarType::float:
+                        case ScalarType::FLOAT:
                             return (new AnyToFloatCaster())->convert($value);
                         default:
                             throw new InvalidArgumentException("Unsupported scalar type: {$type}");

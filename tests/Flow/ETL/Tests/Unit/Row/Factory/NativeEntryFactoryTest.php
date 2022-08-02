@@ -169,7 +169,7 @@ final class NativeEntryFactoryTest extends TestCase
     {
         $this->assertEquals(
             Entry::list_of_int('e', [1, 2, 3]),
-            (new NativeEntryFactory(new Schema(Schema\Definition::list('e', ScalarType::integer))))->create('e', [1, 2, 3])
+            (new NativeEntryFactory(new Schema(Schema\Definition::list('e', new ScalarType(ScalarType::INTEGER)))))->create('e', [1, 2, 3])
         );
     }
 
@@ -178,7 +178,7 @@ final class NativeEntryFactoryTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Field "e" conversion exception. Expected list of integer got different types.');
 
-        (new NativeEntryFactory(new Schema(Schema\Definition::list('e', ScalarType::integer))))->create('e', ['1', '2', '3']);
+        (new NativeEntryFactory(new Schema(Schema\Definition::list('e', new ScalarType(ScalarType::INTEGER)))))->create('e', ['1', '2', '3']);
     }
 
     public function test_list_of_datetime_with_schema() : void

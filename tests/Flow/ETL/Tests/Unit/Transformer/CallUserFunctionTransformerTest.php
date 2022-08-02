@@ -213,7 +213,7 @@ final class CallUserFunctionTransformerTest extends TestCase
 
         $this->assertEquals(new Rows(
             Row::create(
-                new Row\Entry\ListEntry('array_list', ScalarType::integer, [1, 2, 3, 4]),
+                new Row\Entry\ListEntry('array_list', new ScalarType(ScalarType::INTEGER), [1, 2, 3, 4]),
             )
         ), $rows);
     }
@@ -242,7 +242,7 @@ final class CallUserFunctionTransformerTest extends TestCase
 
         $this->assertEquals(new Rows(
             Row::create(
-                new Row\Entry\ListEntry('array_list', ScalarType::integer, [1, 2, 3, 4]),
+                new Row\Entry\ListEntry('array_list', new ScalarType(ScalarType::INTEGER), [1, 2, 3, 4]),
             )
         ), $rows);
     }

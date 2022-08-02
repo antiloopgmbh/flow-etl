@@ -145,7 +145,7 @@ final class ArrayExpandTransformerTest extends TestCase
         $rows = $arrayExpandTransformer->transform(
             new Rows(
                 Row::create(
-                    new Row\Entry\ListEntry('array_entry', ScalarType::string, ['1', '2']),
+                    new Row\Entry\ListEntry('array_entry', new ScalarType(ScalarType::STRING), ['1', '2']),
                 ),
             ),
         );

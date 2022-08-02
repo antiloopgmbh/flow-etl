@@ -63,4 +63,9 @@ final class ObjectType implements Type
     {
         return 'object<' . $this->class . '>';
     }
+
+    public function getClass(): string
+    {
+        return $this->class;
+    }
 }

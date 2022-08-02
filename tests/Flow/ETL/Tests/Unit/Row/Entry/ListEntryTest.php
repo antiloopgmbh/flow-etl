@@ -27,7 +27,7 @@ final class ListEntryTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected list of boolean got different types');
 
-        new ListEntry('list', ScalarType::boolean, ['string', false]);
+        new ListEntry('list', new ScalarType(ScalarType::BOOLEAN), ['string', false]);
     }
 
     public function test_creating_datetime_list_from_wrong_value_types() : void
@@ -43,7 +43,7 @@ final class ListEntryTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected list of float got different types');
 
-        new ListEntry('list', ScalarType::float, ['string', 1.3]);
+        new ListEntry('list', new ScalarType(ScalarType::FLOAT), ['string', 1.3]);
     }
 
     public function test_creating_integer_list_from_wrong_value_types() : void
@@ -51,7 +51,7 @@ final class ListEntryTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected list of integer got different types');
 
-        new ListEntry('list', ScalarType::integer, ['string', 1]);
+        new ListEntry('list', new ScalarType(ScalarType::INTEGER), ['string', 1]);
     }
 
     public function test_creating_list_from_not_list_array() : void
@@ -59,7 +59,7 @@ final class ListEntryTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected list of integer got array with not sequential integer indexes');
 
-        new ListEntry('list', ScalarType::integer, ['a' => 1, 'b' => 2]);
+        new ListEntry('list', new ScalarType(ScalarType::INTEGER), ['a' => 1, 'b' => 2]);
     }
 
     public function test_creating_string_list_from_wrong_value_types() : void
@@ -67,13 +67,13 @@ final class ListEntryTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected list of string got different types');
 
-        new ListEntry('list', ScalarType::string, ['string', 1]);
+        new ListEntry('list', new ScalarType(ScalarType::STRING), ['string', 1]);
     }
 
     public function test_definition() : void
     {
         $this->assertEquals(
-            Definition::list('strings', ScalarType::string, false),
+            Definition::list('strings', new ScalarType(ScalarType::STRING), false),
             Entry::list_of_string('strings', ['one', 'two', 'three'])->definition()
         );
     }
@@ -129,7 +129,7 @@ final class ListEntryTest extends TestCase
     public function test_type() : void
     {
         $this->assertEquals(
-            ScalarType::string,
+            new ScalarType(ScalarType::STRING),
             Entry::list_of_string('strings', ['one', 'two', 'three'])->type()
         );
     }

@@ -169,7 +169,7 @@ class Entry
      */
     final public static function list_of_boolean(string $name, array $value) : RowEntry
     {
-        return new RowEntry\ListEntry($name, ScalarType::boolean, $value);
+        return new RowEntry\ListEntry($name, new ScalarType(ScalarType::BOOLEAN), $value);
     }
 
     /**
@@ -197,7 +197,7 @@ class Entry
      */
     final public static function list_of_float(string $name, array $value) : RowEntry
     {
-        return new RowEntry\ListEntry($name, ScalarType::float, $value);
+        return new RowEntry\ListEntry($name, new ScalarType(ScalarType::FLOAT), $value);
     }
 
     /**
@@ -211,7 +211,7 @@ class Entry
      */
     final public static function list_of_int(string $name, array $value) : RowEntry
     {
-        return new RowEntry\ListEntry($name, ScalarType::integer, $value);
+        return new RowEntry\ListEntry($name, new ScalarType(ScalarType::INTEGER), $value);
     }
 
     /**
@@ -240,7 +240,7 @@ class Entry
      */
     final public static function list_of_string(string $name, array $value) : RowEntry
     {
-        return new RowEntry\ListEntry($name, ScalarType::string, $value);
+        return new RowEntry\ListEntry($name, new ScalarType(ScalarType::STRING), $value);
     }
 
     /**

@@ -525,7 +525,7 @@ final class RowsTest extends TestCase
                 Definition::integer('id'),
                 Definition::union('name', [StringEntry::class, NullEntry::class, IntegerEntry::class]),
                 Definition::array('tags', $nullable = true),
-                Definition::list('list', ScalarType::integer, $nullable = true)
+                Definition::list('list', new ScalarType(ScalarType::INTEGER), $nullable = true)
             ),
             $rows->schema()
         );
@@ -539,7 +539,7 @@ final class RowsTest extends TestCase
         );
 
         $this->assertEquals(
-            new Schema(Definition::list('list', ScalarType::integer)),
+            new Schema(Definition::list('list', new ScalarType(ScalarType::INTEGER))),
             $rows->schema()
         );
     }

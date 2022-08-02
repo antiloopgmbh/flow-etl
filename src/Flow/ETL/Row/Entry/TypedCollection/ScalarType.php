@@ -10,22 +10,41 @@ use Symfony\PolyFill\Php81\Php81;
 /**
  * @psalm-immutable
  */
-enum ScalarType: string implements Type
+class ScalarType implements Type
 {
-    case boolean = 'boolean';
-    case float = 'float';
-    case integer = 'integer';
-    case string = 'string';
+    const BOOLEAN = 'boolean';
+    const FLOAT = 'float';
+    const INTEGER = 'integer';
+    const STRING = 'string';
 
-    public static function fromString(string $value) : self
+    private string $value;
+
+    public function __construct(string $type)
     {
-        return match (\strtolower($value)) {
-            'integer' => self::integer,
-            'float', 'double' => self::float,
-            'string' => self::string,
-            'boolean' => self::boolean,
-            default => throw new InvalidArgumentException("Unsupported scalar type: {$value}")
-        };
+        $this->value = $type;
+    }
+
+    public static function fromString(string $value) : ScalarType
+    {
+        switch (\strtolower($value)) {
+            case 'integer':
+                $type = self::INTEGER;
+                break;
+            case 'float':
+            case 'double':
+                $type = self::FLOAT;
+                break;
+            case 'string':
+                $type = self::STRING;
+                break;
+            case 'boolean':
+                $type = self::BOOLEAN;
+                break;
+            default:
+                throw new InvalidArgumentException("Unsupported scalar type: {$value}");
+        }
+
+        return new self($type);
     }
 
     public function isEqual(Type $type) : bool
@@ -60,6 +79,11 @@ enum ScalarType: string implements Type
     }
 
     public function toString() : string
+    {
+        return $this->value;
+    }
+
+    public function getValue(): string
     {
         return $this->value;
     }
