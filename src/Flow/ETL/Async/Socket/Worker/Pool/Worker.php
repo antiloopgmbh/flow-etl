@@ -6,23 +6,23 @@ namespace Flow\ETL\Async\Socket\Worker\Pool;
 
 final class Worker
 {
-    private WorkerStatus $status;
+    private string $status;
     private string $id;
 
     public function __construct(string $id)
     {
-        $this->status = WorkerStatus::new;
+        $this->status = WorkerStatus::NEW;
         $this->id = $id;
     }
 
     public function connect() : void
     {
-        $this->status = WorkerStatus::connected;
+        $this->status = WorkerStatus::CONNECTED;
     }
 
     public function disconnect() : void
     {
-        $this->status = WorkerStatus::disconnected;
+        $this->status = WorkerStatus::DISCONNECTED;
     }
 
     public function id() : string
@@ -30,7 +30,7 @@ final class Worker
         return $this->id;
     }
 
-    public function status() : WorkerStatus
+    public function status() : string
     {
         return $this->status;
     }

@@ -33,7 +33,7 @@ final class StreamLoaderTest extends TestCase
 
     public function test_loading_rows_and_schema_into_php_memory_stream() : void
     {
-        $loader = To::output(false, StreamLoader\Output::rows_and_schema);
+        $loader = To::output(false, StreamLoader\Output::ROWS_AND_SCHEMA);
 
         \ob_start();
 
@@ -100,7 +100,7 @@ TABLE,
 
     public function test_loading_schema_into_php_memory_stream() : void
     {
-        $loader = new StreamLoader('php://output', Mode::WRITE, 0, StreamLoader\Output::schema);
+        $loader = new StreamLoader('php://output', Mode::WRITE, 0, StreamLoader\Output::SCHEMA);
 
         \ob_start();
 

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Transformer\Math;
 
-enum Operation: string
+abstract class Operation: string
 {
-    case add = 'add';
-    case divide = 'divide';
-    case modulo = 'modulo';
-    case multiply = 'multiply';
-    case power = 'power';
-    case subtract = 'subtract';
+    const ADD = 'add';
+    const DIVIDE = 'divide';
+    const MODULO = 'modulo';
+    const MULTIPLY = 'multiply';
+    const POWER = 'power';
+    const SUBTRACT = 'subtract';
 }

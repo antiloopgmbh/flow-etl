@@ -10,7 +10,7 @@ use Flow\ETL\Async\Socket\Worker\Pool\WorkerStatus;
 final class Pool implements \Countable
 {
     /**
-     * @var array<string, Worker>
+     * @var array<string, Worker>|Worker[]
      */
     private array $workers;
 
@@ -67,7 +67,7 @@ final class Pool implements \Countable
         $workers = [];
 
         foreach ($this->workers as $worker) {
-            if ($worker->status() === WorkerStatus::connected) {
+            if ($worker->status() === WorkerStatus::CONNECTED) {
                 $workers[] = $worker;
             }
         }

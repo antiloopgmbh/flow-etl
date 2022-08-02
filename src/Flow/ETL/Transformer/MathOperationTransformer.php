@@ -18,16 +18,13 @@ final class MathOperationTransformer implements Transformer
 {
     private string $leftEntry;
     private string $rightEntry;
-    private $operation;
+    private string $operation;
     private string $newEntryName;
 
-    /**
-     * @param Operation|string $operation
-     */
     private function __construct(
         string $leftEntry,
         string $rightEntry,
-        $operation,
+        string $operation,
         string $newEntryName
     ) {
         $this->leftEntry = $leftEntry;
@@ -38,32 +35,32 @@ final class MathOperationTransformer implements Transformer
 
     public static function add(string $leftEntry, string $rightEntry, string $newEntryName = 'add') : self
     {
-        return new self($leftEntry, $rightEntry, Operation::add, $newEntryName);
+        return new self($leftEntry, $rightEntry, Operation::ADD, $newEntryName);
     }
 
     public static function divide(string $leftEntry, string $rightEntry, string $newEntryName = 'divide') : self
     {
-        return new self($leftEntry, $rightEntry, Operation::divide, $newEntryName);
+        return new self($leftEntry, $rightEntry, Operation::DIVIDE, $newEntryName);
     }
 
     public static function modulo(string $leftEntry, string $rightEntry, string $newEntryName = 'modulo') : self
     {
-        return new self($leftEntry, $rightEntry, Operation::modulo, $newEntryName);
+        return new self($leftEntry, $rightEntry, Operation::MODULO, $newEntryName);
     }
 
     public static function multiply(string $leftEntry, string $rightEntry, string $newEntryName = 'multiply') : self
     {
-        return new self($leftEntry, $rightEntry, Operation::multiply, $newEntryName);
+        return new self($leftEntry, $rightEntry, Operation::MULTIPLY, $newEntryName);
     }
 
     public static function power(string $leftEntry, string $rightEntry, string $newEntryName = 'power') : self
     {
-        return new self($leftEntry, $rightEntry, Operation::power, $newEntryName);
+        return new self($leftEntry, $rightEntry, Operation::POWER, $newEntryName);
     }
 
     public static function subtract(string $leftEntry, string $rightEntry, string $newEntryName = 'subtract') : self
     {
-        return new self($leftEntry, $rightEntry, Operation::subtract, $newEntryName);
+        return new self($leftEntry, $rightEntry, Operation::SUBTRACT, $newEntryName);
     }
 
     public function __serialize() : array
@@ -109,27 +106,23 @@ final class MathOperationTransformer implements Transformer
                 throw new RuntimeException("\"{$this->rightEntry}\" is not IntegerEntry or FloatEntry");
             }
 
-            $operation = \is_string($this->operation)
-                ? Operation::from($this->operation)
-                : $this->operation;
-
-            switch ($operation) {
-                case Operation::add:
+            switch ($this->operation) {
+                case Operation::ADD:
                     $value = $left->value() + $right->value();
                     break;
-                case Operation::subtract:
+                case Operation::SUBTRACT:
                     $value = $left->value() - $right->value();
                     break;
-                case Operation::multiply:
+                case Operation::MULTIPLY:
                     $value = $left->value() * $right->value();
                     break;
-                case Operation::divide:
+                case Operation::DIVIDE:
                     $value = $left->value() / $right->value();
                     break;
-                case Operation::modulo:
+                case Operation::MODULO:
                     $value = $left->value() % $right->value();
                     break;
-                case Operation::power:
+                case Operation::POWER:
                     $value = $left->value() ** $right->value();
                     break;
                 default:

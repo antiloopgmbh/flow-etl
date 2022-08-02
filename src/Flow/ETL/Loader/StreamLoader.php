@@ -19,23 +19,20 @@ use Flow\ETL\Stream\Mode;
 final class StreamLoader implements Loader
 {
     private string $url;
-    private Mode $mode;
+    private string $mode;
     private $truncate;
-    private Output $output;
+    private string $output;
     private Formatter $formatter;
     private SchemaFormatter $schemaFormatter;
 
     /**
-     * @param string $url all protocols supported by PHP are allowed https://www.php.net/manual/en/wrappers.php
-     * @param Mode $mode only writing modes explained in https://www.php.net/manual/en/function.fopen.php are supported
      * @param bool|int $truncate if false or 0, then columns in display are not truncated
-     * @param Formatter $formatter - if not passed AsciiTableFormatter is used
      */
     public function __construct(
         string $url,
-        Mode $mode = Mode::WRITE,
+        string $mode = Mode::WRITE,
         $truncate = 20,
-        Output $output = Output::rows,
+        string $output = Output::ROWS,
         Formatter $formatter = null,
         SchemaFormatter $schemaFormatter = null
     ) {
@@ -50,17 +47,17 @@ final class StreamLoader implements Loader
     /**
      * @param int|bool $truncate
      */
-    public static function output($truncate = 20, Output $output = Output::rows, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
+    public static function output($truncate = 20, string $output = Output::ROWS, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
     {
         return new self('php://output', Mode::WRITE, $truncate, $output, $formatter ?? new Formatter\AsciiTableFormatter(), $schemaFormatter ?? new ASCIISchemaFormatter());
     }
 
-    public static function stderr($truncate = 20, Output $output = Output::rows, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
+    public static function stderr($truncate = 20, string $output = Output::ROWS, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
     {
         return new self('php://stderr', Mode::WRITE, $truncate, $output, $formatter ?? new Formatter\AsciiTableFormatter(), $schemaFormatter ?? new ASCIISchemaFormatter());
     }
 
-    public static function stdout($truncate = 20, Output $output = Output::rows, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
+    public static function stdout($truncate = 20, string $output = Output::ROWS, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
     {
         return new self('php://stdout', Mode::WRITE, $truncate, $output, $formatter ?? new Formatter\AsciiTableFormatter(), $schemaFormatter ?? new ASCIISchemaFormatter());
     }
@@ -100,13 +97,13 @@ final class StreamLoader implements Loader
         }
 
         switch ($this->output) {
-            case Output::rows:
+            case Output::ROWS:
                 $output = $this->formatter->format($rows, $this->truncate);
                 break;
-            case Output::schema:
+            case Output::SCHEMA:
                 $output = $this->schemaFormatter->format($rows->schema());
                 break;
-            case Output::rows_and_schema:
+            case Output::ROWS_AND_SCHEMA:
                 $output = $this->formatter->format($rows, $this->truncate) . "\n" . $this->schemaFormatter->format($rows->schema());
                 break;
         }

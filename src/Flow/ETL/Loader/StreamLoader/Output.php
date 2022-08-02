@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Loader\StreamLoader;
 
-enum Output
+abstract class Output
 {
-    case rows;
-    case rows_and_schema;
-    case schema;
+    const ROWS = 'rows';
+    const ROWS_AND_SCHEMA = 'rows_and_schema';
+    const SCHEMA = 'schema';
 }

@@ -32,7 +32,7 @@ final class Handler
     /**
      * @return resource
      */
-    public function open(FileStream $stream, Mode $mode)
+    public function open(FileStream $stream, string $mode)
     {
         $context = \count($stream->options())
             ? \stream_context_create([$stream->scheme() => $stream->options()])
@@ -57,7 +57,7 @@ final class Handler
             $fullPath = $stream->uri();
         }
 
-        $resource = \fopen($fullPath, $mode->value, null !== $context, $context);
+        $resource = \fopen($fullPath, $mode, null !== $context, $context);
 
         if ($resource === false) {
             throw new RuntimeException("Unable to open stream for path {$stream->uri()}.");

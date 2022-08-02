@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Stream;
 
-enum Mode: string
+abstract class Mode: string
 {
-    case READ = 'r';
+    const READ = 'r';
 
-    case READ_BINARY = 'rb';
+    const READ_BINARY = 'rb';
 
-    case READ_WRITE = 'r+';
+    const READ_WRITE = 'r+';
 
-    case WRITE = 'w';
+    const WRITE = 'w';
 
-    case WRITE_BINARY = 'wb';
+    const WRITE_BINARY = 'wb';
 }
