@@ -50,19 +50,19 @@ final class StreamLoader implements Loader
     /**
      * @param int|bool $truncate
      */
-    public static function output($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
+    public static function output($truncate = 20, Output $output = Output::rows, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
     {
-        return new self('php://output', Mode::WRITE, $truncate, $output, $formatter, $schemaFormatter);
+        return new self('php://output', Mode::WRITE, $truncate, $output, $formatter ?? new Formatter\AsciiTableFormatter(), $schemaFormatter ?? new ASCIISchemaFormatter());
     }
 
-    public static function stderr($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
+    public static function stderr($truncate = 20, Output $output = Output::rows, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
     {
-        return new self('php://stderr', Mode::WRITE, $truncate, $output, $formatter, $schemaFormatter);
+        return new self('php://stderr', Mode::WRITE, $truncate, $output, $formatter ?? new Formatter\AsciiTableFormatter(), $schemaFormatter ?? new ASCIISchemaFormatter());
     }
 
-    public static function stdout($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
+    public static function stdout($truncate = 20, Output $output = Output::rows, Formatter $formatter = null, SchemaFormatter $schemaFormatter = null) : self
     {
-        return new self('php://stdout', Mode::WRITE, $truncate, $output, $formatter, $schemaFormatter);
+        return new self('php://stdout', Mode::WRITE, $truncate, $output, $formatter ?? new Formatter\AsciiTableFormatter(), $schemaFormatter ?? new ASCIISchemaFormatter());
     }
 
     public function __serialize() : array

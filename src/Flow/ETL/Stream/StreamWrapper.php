@@ -72,5 +72,5 @@ interface StreamWrapper
      *
      * @return array<mixed>|false
      */
-    public function url_stat(string $path, int $flags) : array|false;
+    public function url_stat(string $path, int $flags);
 }
