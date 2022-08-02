@@ -35,7 +35,7 @@ final class Max implements Aggregator
                     $this->max = \max($this->max, (float) $value);
                 }
             }
-        } catch (InvalidArgumentException) {
+        } catch (InvalidArgumentException $e) {
             // do nothing?
         }
     }

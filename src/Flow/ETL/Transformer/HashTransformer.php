@@ -67,7 +67,7 @@ final class HashTransformer implements Transformer
             foreach ($this->entries as $entry) {
                 try {
                     $values[] = $row->entries()->get($entry)->toString();
-                } catch (InvalidArgumentException) {
+                } catch (InvalidArgumentException $e) {
                     // entry not found, ignore
                 }
             }

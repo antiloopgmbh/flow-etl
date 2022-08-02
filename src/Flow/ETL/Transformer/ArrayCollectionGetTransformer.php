@@ -86,7 +86,7 @@ final class ArrayCollectionGetTransformer implements Transformer
                 $array = ($this->index === '0') ? \array_values($arrayEntry->value()) : $arrayEntry->value();
 
                 $extractedValues = array_dot_get($array, $path);
-            } catch (InvalidPathException) {
+            } catch (InvalidPathException $e) {
                 throw new RuntimeException("{$this->arrayEntryName}, must be an array of array (collection of arrays) but it seems to be a regular array.");
             }
 

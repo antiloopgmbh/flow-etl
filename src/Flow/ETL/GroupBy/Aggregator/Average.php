@@ -32,7 +32,7 @@ final class Average implements Aggregator
                 $this->sum += $value;
                 $this->count++;
             }
-        } catch (InvalidArgumentException) {
+        } catch (InvalidArgumentException $e) {
             // do nothing?
         }
     }

@@ -38,7 +38,7 @@ final class SelectiveValidator implements SchemaValidator
                     if (!$definition->matches($entry)) {
                         return false;
                     }
-                } catch (InvalidArgumentException) {
+                } catch (InvalidArgumentException $e) {
                     return false;
                 }
             }

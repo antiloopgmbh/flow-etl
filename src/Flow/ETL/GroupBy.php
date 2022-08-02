@@ -60,7 +60,7 @@ final class GroupBy
 
                     /** @psalm-suppress MixedAssignment */
                     $values[$entryName] = $value;
-                } catch (InvalidArgumentException) {
+                } catch (InvalidArgumentException $e) {
                     $values[$entryName] = null;
                 }
             }

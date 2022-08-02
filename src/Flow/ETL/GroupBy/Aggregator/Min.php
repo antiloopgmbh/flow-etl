@@ -35,7 +35,7 @@ final class Min implements Aggregator
                     $this->min = \min($this->min, (float) $value);
                 }
             }
-        } catch (InvalidArgumentException) {
+        } catch (InvalidArgumentException $e) {
             // do nothing?
         }
     }

@@ -29,7 +29,7 @@ final class Sum implements Aggregator
             if (\is_numeric($value)) {
                 $this->sum += $value;
             }
-        } catch (InvalidArgumentException) {
+        } catch (InvalidArgumentException $e) {
             // do nothing?
         }
     }
