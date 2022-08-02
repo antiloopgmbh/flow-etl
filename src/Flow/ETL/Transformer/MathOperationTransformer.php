@@ -113,15 +113,28 @@ final class MathOperationTransformer implements Transformer
                 ? Operation::from($this->operation)
                 : $this->operation;
 
-            $value = match ($operation) {
-                Operation::add => $left->value() + $right->value(),
-                Operation::subtract => $left->value() - $right->value(),
-                Operation::multiply => $left->value() * $right->value(),
-                Operation::divide => $left->value() / $right->value(),
-                Operation::modulo => $left->value() % $right->value(),
-                Operation::power => $left->value() ** $right->value(),
-                default => throw new RuntimeException('Unknown operation'),
-            };
+            switch ($operation) {
+                case Operation::add:
+                    $value = $left->value() + $right->value();
+                    break;
+                case Operation::subtract:
+                    $value = $left->value() - $right->value();
+                    break;
+                case Operation::multiply:
+                    $value = $left->value() * $right->value();
+                    break;
+                case Operation::divide:
+                    $value = $left->value() / $right->value();
+                    break;
+                case Operation::modulo:
+                    $value = $left->value() % $right->value();
+                    break;
+                case Operation::power:
+                    $value = $left->value() ** $right->value();
+                    break;
+                default:
+                    throw new RuntimeException('Unknown operation');
+            }
 
             if (\is_float($value)) {
                 return $row->set(new Row\Entry\FloatEntry($this->newEntryName, $value));

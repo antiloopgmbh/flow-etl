@@ -28,15 +28,19 @@ final class NotEmpty implements Constraint
     public function isSatisfiedBy(Entry $entry) : bool
     {
         /** @psalm-suppress MixedArgument */
-        return match (\get_class($entry)) {
-            Entry\ArrayEntry::class,
-            Entry\CollectionEntry::class,
-            Entry\StructureEntry::class,
+        switch (\get_class($entry)) {
+            case Entry\ArrayEntry::class:
+            case Entry\CollectionEntry::class:
+            case Entry\StructureEntry::class:
             /** @phpstan-ignore-next-line  */
-            Entry\ListEntry::class => (bool) \count($entry->value()),
-            Entry\StringEntry::class => $entry->value() !== '',
-            Entry\JsonEntry::class => !\in_array($entry->value(), ['', '[]', '{}'], true),
-            default => true, //everything else can't be empty
-        };
+            case Entry\ListEntry::class:
+                return (bool) \count($entry->value());
+            case Entry\StringEntry::class:
+                return $entry->value() !== '';
+            case Entry\JsonEntry::class:
+                return !\in_array($entry->value(), ['', '[]', '{}'], true);
+            default:
+                return true; //everything else can't be empty
+        }
     }
 }

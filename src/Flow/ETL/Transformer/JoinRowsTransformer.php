@@ -79,11 +79,14 @@ final class JoinRowsTransformer implements Transformer
 
     public function transform(Rows $rows) : Rows
     {
-        return match ($this->type) {
-            Join::left => $rows->joinLeft($this->rows(), $this->condition),
-            Join::right => $rows->joinRight($this->rows(), $this->condition),
-            default => $rows->joinInner($this->rows(), $this->condition),
-        };
+        switch ($this->type) {
+            case Join::left:
+                return $rows->joinLeft($this->rows(), $this->condition);
+            case Join::right:
+                return $rows->joinRight($this->rows(), $this->condition);
+            default:
+                return $rows->joinInner($this->rows(), $this->condition);
+        }
     }
 
     /**

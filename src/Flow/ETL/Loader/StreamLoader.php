@@ -96,14 +96,19 @@ final class StreamLoader implements Loader
             throw new RuntimeException("Can't open stream for url: {$this->url} in mode: {$this->mode->value}");
         }
 
-        \fwrite(
-            $stream,
-            match ($this->output) {
-                Output::rows => $this->formatter->format($rows, $this->truncate),
-                Output::schema => $this->schemaFormatter->format($rows->schema()),
-                Output::rows_and_schema => $this->formatter->format($rows, $this->truncate) . "\n" . $this->schemaFormatter->format($rows->schema())
-            }
-        );
+        switch ($this->output) {
+            case Output::rows:
+                $output = $this->formatter->format($rows, $this->truncate);
+                break;
+            case Output::schema:
+                $output = $this->schemaFormatter->format($rows->schema());
+                break;
+            case Output::rows_and_schema:
+                $output = $this->formatter->format($rows, $this->truncate) . "\n" . $this->schemaFormatter->format($rows->schema());
+                break;
+        }
+
+        \fwrite($stream, $output);
 
         \fclose($stream);
     }
