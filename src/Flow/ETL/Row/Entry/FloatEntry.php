@@ -31,7 +31,10 @@ final class FloatEntry implements \Stringable, Entry
         $this->precision = $precision;
     }
 
-    public static function from(string $name, float|int|string $value) : self
+    /**
+     * @param float|int|string $value
+     */
+    public static function from(string $name, $value) : self
     {
         if (!\is_numeric($value) || $value != (int) $value) {
             throw InvalidArgumentException::because(\sprintf('Value "%s" can\'t be casted to integer.', $value));

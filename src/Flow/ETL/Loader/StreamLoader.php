@@ -47,17 +47,20 @@ final class StreamLoader implements Loader
         $this->schemaFormatter = $schemaFormatter ?? new ASCIISchemaFormatter();
     }
 
-    public static function output(int|bool $truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
+    /**
+     * @param int|bool $truncate
+     */
+    public static function output($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
     {
         return new self('php://output', Mode::WRITE, $truncate, $output, $formatter, $schemaFormatter);
     }
 
-    public static function stderr(int|bool $truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
+    public static function stderr($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
     {
         return new self('php://stderr', Mode::WRITE, $truncate, $output, $formatter, $schemaFormatter);
     }
 
-    public static function stdout(int|bool $truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
+    public static function stdout($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self
     {
         return new self('php://stdout', Mode::WRITE, $truncate, $output, $formatter, $schemaFormatter);
     }

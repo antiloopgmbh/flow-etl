@@ -27,7 +27,10 @@ final class GroupByPipeline implements Pipeline
         $this->groupBy = $groupBy;
     }
 
-    public function add(Loader|Transformer $pipe) : self
+    /**
+     * @param Loader|Transformer $pipe
+     */
+    public function add($pipe) : self
     {
         $this->nextPipeline->add($pipe);
 

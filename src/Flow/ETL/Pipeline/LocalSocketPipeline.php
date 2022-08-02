@@ -43,7 +43,10 @@ final class LocalSocketPipeline implements Pipeline
         $this->launcher = $launcher;
     }
 
-    public function add(Loader|Transformer $pipe) : self
+    /**
+     * @param Loader|Transformer $pipe
+     */
+    public function add($pipe) : self
     {
         $this->pipes->add($pipe);
 

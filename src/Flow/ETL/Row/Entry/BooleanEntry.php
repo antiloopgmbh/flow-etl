@@ -29,7 +29,10 @@ final class BooleanEntry implements \Stringable, Entry
         $this->value = $value;
     }
 
-    public static function from(string $name, bool|int|string $value) : self
+    /**
+     * @param bool|int|string $value
+     */
+    public static function from(string $name, $value) : self
     {
         if (\is_bool($value)) {
             return new self($name, $value);

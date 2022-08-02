@@ -44,7 +44,10 @@ interface StreamWrapper
 
     public function stream_open(string $path, string $mode, int $options, ?string &$opened_path) : bool;
 
-    public function stream_read(int $count) : string|false;
+    /**
+     * @return string|false
+     */
+    public function stream_read(int $count);
 
     public function stream_seek(int $offset, int $whence = SEEK_SET) : bool;
 
@@ -53,7 +56,7 @@ interface StreamWrapper
     /**
      * @return array<mixed>|false
      */
-    public function stream_stat() : array|false;
+    public function stream_stat();
 
     public function stream_tell() : int;
 

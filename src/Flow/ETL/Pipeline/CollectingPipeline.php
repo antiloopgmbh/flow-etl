@@ -26,7 +26,10 @@ final class CollectingPipeline implements Pipeline
         $this->pipeline = $pipeline;
     }
 
-    public function add(Loader|Transformer $pipe) : self
+    /**
+     * @param Loader|Transformer $pipe
+     */
+    public function add($pipe) : self
     {
         $this->nextPipeline->add($pipe);
 

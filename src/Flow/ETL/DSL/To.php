@@ -33,22 +33,34 @@ class To
         return new Loader\MemoryLoader($memory);
     }
 
-    final public static function output(int|bool $truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : Loader
+    /**
+     * @param int|bool $truncate
+     */
+    final public static function output($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : Loader
     {
         return Loader\StreamLoader::output($truncate, $output, $formatter, $schemaFormatter);
     }
 
-    final public static function stderr(int|bool $truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : Loader
+    /**
+     * @param int|bool $truncate
+     */
+    final public static function stderr($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : Loader
     {
         return Loader\StreamLoader::stderr($truncate, $output, $formatter, $schemaFormatter);
     }
 
-    final public static function stdout(int|bool $truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : Loader
+    /**
+     * @param int|bool $truncate
+     */
+    final public static function stdout($truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : Loader
     {
         return Loader\StreamLoader::stdout($truncate, $output, $formatter, $schemaFormatter);
     }
 
-    final public static function stream(string $uri, int|bool $truncate = 20, Output $output = Output::rows, string $mode = 'w', Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : Loader
+    /**
+     * @param int|bool $truncate
+     */
+    final public static function stream(string $uri, $truncate = 20, Output $output = Output::rows, string $mode = 'w', Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : Loader
     {
         return new Loader\StreamLoader($uri, Mode::from($mode), $truncate, $output, $formatter, $schemaFormatter);
     }

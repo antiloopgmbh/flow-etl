@@ -36,9 +36,10 @@ final class ASCIITable
     /**
      * This is the function that you will call to make the table. You must pass it at least the first variable.
      *
+     * @param int|bool $truncate
      * @param array<int, array<string, mixed>> $array A multi-dimensional array containing the data you want to build a table from
      */
-    public function makeTable(array $array, int|bool $truncate = 20) : string
+    public function makeTable(array $array, $truncate = 20) : string
     {
         // First things first lets get the variable ready
         $table = '';

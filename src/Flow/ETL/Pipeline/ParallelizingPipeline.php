@@ -34,7 +34,10 @@ final class ParallelizingPipeline implements Pipeline
         $this->parallel = $parallel;
     }
 
-    public function add(Loader|Transformer $pipe) : self
+    /**
+     * @param Loader|Transformer $pipe
+     */
+    public function add($pipe) : self
     {
         $this->nextPipeline->add($pipe);
 

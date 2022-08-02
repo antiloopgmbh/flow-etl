@@ -23,7 +23,10 @@ final class NestedPipeline implements Pipeline
         $this->nextPipeline = $nextPipeline;
     }
 
-    public function add(Loader|Transformer $pipe) : Pipeline
+    /**
+     * @param Loader|Transformer $pipe
+     */
+    public function add($pipe) : Pipeline
     {
         $this->nextPipeline->add($pipe);
 

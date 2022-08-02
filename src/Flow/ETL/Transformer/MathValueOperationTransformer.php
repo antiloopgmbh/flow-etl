@@ -37,32 +37,50 @@ final class MathValueOperationTransformer implements Transformer
         $this->newEntryName = $newEntryName;
     }
 
-    public static function add(string $leftEntry, int|float $rightValue, string $newEntryName = 'add') : self
+    /**
+     * @param int|float $rightValue
+     */
+    public static function add(string $leftEntry, $rightValue, string $newEntryName = 'add') : self
     {
         return new self($leftEntry, $rightValue, Operation::add, $newEntryName);
     }
 
-    public static function divide(string $leftEntry, int|float $rightValue, string $newEntryName = 'divide') : self
+    /**
+     * @param int|float $rightValue
+     */
+    public static function divide(string $leftEntry, $rightValue, string $newEntryName = 'divide') : self
     {
         return new self($leftEntry, $rightValue, Operation::divide, $newEntryName);
     }
 
-    public static function modulo(string $leftEntry, int|float $rightValue, string $newEntryName = 'modulo') : self
+    /**
+     * @param int|float $rightValue
+     */
+    public static function modulo(string $leftEntry, $rightValue, string $newEntryName = 'modulo') : self
     {
         return new self($leftEntry, $rightValue, Operation::modulo, $newEntryName);
     }
 
-    public static function multiply(string $leftEntry, int|float $rightValue, string $newEntryName = 'multiply') : self
+    /**
+     * @param int|float $rightValue
+     */
+    public static function multiply(string $leftEntry, $rightValue, string $newEntryName = 'multiply') : self
     {
         return new self($leftEntry, $rightValue, Operation::multiply, $newEntryName);
     }
 
-    public static function power(string $leftEntry, int|float $rightValue, string $newEntryName = 'power') : self
+    /**
+     * @param int|float $rightValue
+     */
+    public static function power(string $leftEntry, $rightValue, string $newEntryName = 'power') : self
     {
         return new self($leftEntry, $rightValue, Operation::power, $newEntryName);
     }
 
-    public static function subtract(string $leftEntry, int|float $rightValue, string $newEntryName = 'subtract') : self
+    /**
+     * @param int|float $rightValue
+     */
+    public static function subtract(string $leftEntry, $rightValue, string $newEntryName = 'subtract') : self
     {
         return new self($leftEntry, $rightValue, Operation::subtract, $newEntryName);
     }
