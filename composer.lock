@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a0eec6d6d6bf5364c506dcdc4e2066e",
+    "content-hash": "56ee2af1be8567090151df47619392a4",
     "packages": [
+        {
+            "name": "benmorel/weakmap-polyfill",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BenMorel/weakmap-polyfill.git",
+                "reference": "d8f6f172a4f37eea4b86b652b25196928c1d51fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BenMorel/weakmap-polyfill/zipball/d8f6f172a4f37eea4b86b652b25196928c1d51fc",
+                "reference": "d8f6f172a4f37eea4b86b652b25196928c1d51fc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.4",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A WeakMap polyfill for PHP 7.4",
+            "keywords": [
+                "weakmap",
+                "weakref",
+                "weakreference"
+            ],
+            "support": {
+                "issues": "https://github.com/BenMorel/weakmap-polyfill/issues",
+                "source": "https://github.com/BenMorel/weakmap-polyfill/tree/0.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/BenMorel",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-09T23:21:21+00:00"
+        },
         {
             "name": "flow-php/array-dot",
             "version": "dev-php7.4-backport",

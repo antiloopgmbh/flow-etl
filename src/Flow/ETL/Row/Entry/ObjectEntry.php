@@ -12,7 +12,7 @@ use Flow\ETL\Row\Schema\Definition;
  * @implements Entry<object, array{name: string, value: object}>
  * @psalm-immutable
  */
-final class ObjectEntry implements \Stringable, Entry
+final class ObjectEntry implements Entry
 {
     private string $name;
     private object $value;

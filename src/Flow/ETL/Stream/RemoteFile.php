@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Flow\ETL\Stream;
 
 use Flow\ETL\Exception\InvalidArgumentException;
+use Flow\StringUtils;
 
 /**
  * @implements FileStream<array{uri: string, options: array<string, mixed>}>
@@ -45,7 +46,7 @@ final class RemoteFile implements FileStream
             throw new InvalidArgumentException('Stream uri is missing scheme');
         }
 
-        if (!\str_starts_with($urlParts['scheme'], 'flow-')) {
+        if (!StringUtils::str_starts_with($urlParts['scheme'], 'flow-')) {
             throw new InvalidArgumentException('Stream scheme must starts with "flow-"');
         }
 

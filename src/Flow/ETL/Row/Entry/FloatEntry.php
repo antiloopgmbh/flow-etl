@@ -12,7 +12,7 @@ use Flow\ETL\Row\Schema\Definition;
  * @implements Entry<float, array{name: string, value: float, precision: int}>
  * @psalm-immutable
  */
-final class FloatEntry implements \Stringable, Entry
+final class FloatEntry implements Entry
 {
     private string $name;
     private float $value;

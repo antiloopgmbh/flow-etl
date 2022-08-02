@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Flow\ETL\Async\Socket\Communication;
 
 use Flow\Serializer\Serializer;
+use Flow\StringUtils;
 
 final class MessageBuffer
 {
@@ -32,21 +33,21 @@ final class MessageBuffer
             $this->buffers->offsetSet($connection, []);
         }
 
-        if (\str_starts_with($data, '|') && !\str_ends_with($data, '|')) {
+        if (StringUtils::str_starts_with($data, '|') && !StringUtils::str_ends_with($data, '|')) {
             /** @phpstan-ignore-next-line  */
             $this->buffers->offsetSet($connection, \array_merge($this->buffers->offsetGet($connection), [$data]));
 
             return null;
         }
 
-        if (!\str_starts_with($data, '|') && !\str_ends_with($data, '|')) {
+        if (!StringUtils::str_starts_with($data, '|') && !StringUtils::str_ends_with($data, '|')) {
             /** @phpstan-ignore-next-line  */
             $this->buffers->offsetSet($connection, \array_merge($this->buffers->offsetGet($connection), [$data]));
 
             return null;
         }
 
-        if (!\str_starts_with($data, '|') && \str_ends_with($data, '|')) {
+        if (!StringUtils::str_starts_with($data, '|') && StringUtils::str_ends_with($data, '|')) {
             /** @phpstan-ignore-next-line  */
             $this->buffers->offsetSet($connection, \array_merge($this->buffers->offsetGet($connection), [$data]));
 

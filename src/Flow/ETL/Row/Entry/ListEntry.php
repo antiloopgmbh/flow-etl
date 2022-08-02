@@ -11,6 +11,7 @@ use Flow\ETL\Row\Entry\TypedCollection\Type;
 use Flow\ETL\Row\Schema\Definition;
 use Flow\ETL\Row\Schema\FlowMetadata;
 use Flow\ETL\Row\Schema\Metadata;
+use Symfony\PolyFill\Php81\Php81;
 
 /**
  * @template T
@@ -39,7 +40,7 @@ final class ListEntry implements Entry, TypedCollection
             throw InvalidArgumentException::because('Entry name cannot be empty');
         }
 
-        if (\count($value) && !\array_is_list($value)) {
+        if (\count($value) && !Php81::array_is_list($value)) {
             throw new InvalidArgumentException('Expected list of ' . $type->toString() . ' got array with not sequential integer indexes');
         }
 

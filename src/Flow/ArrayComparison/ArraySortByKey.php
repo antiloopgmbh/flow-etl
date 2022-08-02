@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Flow\ArrayComparison;
 
+use Symfony\PolyFill\Php81\Php81;
+
 /**
  * @psalm-immutable
  */
@@ -21,7 +23,7 @@ final class ArraySortByKey
             $array
         );
 
-        if (\array_is_list($array)) {
+        if (Php81::array_is_list($array)) {
             \usort($array, fn ($a, $b) : int => $a <=> $b);
         } else {
             \uksort($array, fn ($a, $b) : int => $a <=> $b);

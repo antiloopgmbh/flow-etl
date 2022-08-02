@@ -12,6 +12,7 @@ use Flow\ETL\Row\Entry\TypedCollection\Type;
 use Flow\ETL\Row\EntryFactory;
 use Flow\ETL\Row\Schema;
 use Flow\ETL\Row\Schema\Definition;
+use Symfony\Polyfill\Php81\Php81;
 
 /**
  * @implements EntryFactory<array{schema: ?Schema}>
@@ -83,7 +84,7 @@ final class NativeEntryFactory implements EntryFactory
         }
 
         if (\is_array($value)) {
-            if (!\array_is_list($value)) {
+            if (!Php81::array_is_list($value)) {
                 return new Row\Entry\ArrayEntry($entryName, $value);
             }
 
@@ -211,7 +212,7 @@ final class NativeEntryFactory implements EntryFactory
                 throw new InvalidArgumentException("Value \"not_valid\" can't be converted to " . $enumClass . ' enum');
             }
 
-            if ($type === Entry\ListEntry::class && \is_array($value) && \array_is_list($value)) {
+            if ($type === Entry\ListEntry::class && \is_array($value) && Php81::array_is_list($value)) {
                 try {
                     /** @var Type $listType */
                     $listType = $definition->metadata()->get(Schema\FlowMetadata::METADATA_LIST_ENTRY_TYPE);

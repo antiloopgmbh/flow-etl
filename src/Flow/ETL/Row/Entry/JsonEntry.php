@@ -8,12 +8,13 @@ use Flow\ArrayComparison\ArrayComparison;
 use Flow\ETL\Exception\InvalidArgumentException;
 use Flow\ETL\Row\Entry;
 use Flow\ETL\Row\Schema\Definition;
+use Flow\StringUtils;
 
 /**
  * @implements Entry<string, array{name: string, value: array<mixed>, object: boolean}>
  * @psalm-immutable
  */
-final class JsonEntry implements \Stringable, Entry
+final class JsonEntry implements Entry
 {
     private bool $object;
     private string $name;
@@ -45,7 +46,7 @@ final class JsonEntry implements \Stringable, Entry
      */
     public static function fromJsonString(string $name, string $json) : self
     {
-        if (\str_starts_with($json, '{') && \str_ends_with($json, '}')) {
+        if (StringUtils::str_starts_with($json, '{') && StringUtils::str_ends_with($json, '}')) {
             return self::object($name, (array) \json_decode($json, true, 515, JSON_THROW_ON_ERROR));
         }
 
