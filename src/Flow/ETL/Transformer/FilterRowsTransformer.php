@@ -18,7 +18,7 @@ final class FilterRowsTransformer implements Transformer
     /**
      * @var Filter[]
      */
-    private readonly array $filters;
+    private array $filters;
 
     public function __construct(Filter ...$filters)
     {

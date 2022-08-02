@@ -14,8 +14,13 @@ use Flow\ETL\Transformer\Filter\Filter\ValidValue\Validator;
  */
 final class ValidValue implements Filter
 {
-    public function __construct(private string $entryName, private Validator $validator)
+    private string $entryName;
+    private Validator $validator;
+
+    public function __construct(string $entryName, Validator $validator)
     {
+        $this->entryName = $entryName;
+        $this->validator = $validator;
     }
 
     public function __serialize() : array

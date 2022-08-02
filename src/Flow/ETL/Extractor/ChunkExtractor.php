@@ -11,10 +11,15 @@ use Flow\ETL\Extractor;
  */
 final class ChunkExtractor implements Extractor
 {
+    private Extractor $extractor;
+    private int $chunkSize;
+
     public function __construct(
-        private readonly Extractor $extractor,
-        private readonly int $chunkSize
+        Extractor $extractor,
+        int $chunkSize
     ) {
+        $this->extractor = $extractor;
+        $this->chunkSize = $chunkSize;
     }
 
     public function extract() : \Generator

@@ -30,6 +30,13 @@ final class CallUserFunctionTransformer implements Transformer
      * @phpstan-var callable
      */
     private $callback;
+    private array $entries;
+    private array $extraArguments;
+    private ?string $valueArgumentName;
+    /**
+     * @var EntryFactory|NativeEntryFactory
+     */
+    private $entryFactory;
 
     /**
      * @param array<string> $entries
@@ -39,13 +46,17 @@ final class CallUserFunctionTransformer implements Transformer
      * @param EntryFactory $entryFactory
      */
     public function __construct(
-        private readonly array $entries,
+        array $entries,
         callable $callback,
-        private readonly array $extraArguments = [],
-        private readonly ?string $valueArgumentName = null,
-        private readonly EntryFactory $entryFactory = new NativeEntryFactory()
+        array $extraArguments = [],
+        ?string $valueArgumentName = null,
+        EntryFactory $entryFactory = null
     ) {
         $this->callback = $callback;
+        $this->entries = $entries;
+        $this->extraArguments = $extraArguments;
+        $this->valueArgumentName = $valueArgumentName;
+        $this->entryFactory = $entryFactory ?? new NativeEntryFactory();
     }
 
     public function __serialize() : array

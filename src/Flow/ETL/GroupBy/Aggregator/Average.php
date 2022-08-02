@@ -12,13 +12,14 @@ use Flow\ETL\Row\Entry;
 final class Average implements Aggregator
 {
     private int $count;
-
     private float $sum;
+    private string $entry;
 
-    public function __construct(private readonly string $entry)
+    public function __construct(string $entry)
     {
         $this->count = 0;
         $this->sum = 0;
+        $this->entry = $entry;
     }
 
     public function aggregate(Row $row) : void

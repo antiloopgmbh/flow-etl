@@ -10,10 +10,15 @@ use Psr\Log\LoggerInterface;
 
 final class SocketLocalWorkerCLI implements CLI
 {
+    private LoggerInterface $logger;
+    private Client $client;
+
     public function __construct(
-        private readonly LoggerInterface $logger,
-        private readonly Client $client
+        LoggerInterface $logger,
+        Client $client
     ) {
+        $this->logger = $logger;
+        $this->client = $client;
     }
 
     public function run(Input $input) : int

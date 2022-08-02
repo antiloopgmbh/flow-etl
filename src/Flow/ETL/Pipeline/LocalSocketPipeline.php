@@ -21,13 +21,15 @@ final class LocalSocketPipeline implements Pipeline
 {
     private Extractor $extractor;
 
-    private readonly Pipes $pipes;
+    private Pipes $pipes;
 
-    private readonly int $totalWorkers;
+    private int $totalWorkers;
+    private Server $server;
+    private WorkerLauncher $launcher;
 
     public function __construct(
-        private readonly Server $server,
-        private readonly WorkerLauncher $launcher,
+        Server $server,
+        WorkerLauncher $launcher,
         int $workers
     ) {
         if ($workers < 1) {
@@ -37,6 +39,8 @@ final class LocalSocketPipeline implements Pipeline
         $this->totalWorkers = $workers;
         $this->pipes = Pipes::empty();
         $this->extractor = new ProcessExtractor(new Rows());
+        $this->server = $server;
+        $this->launcher = $launcher;
     }
 
     public function add(Loader|Transformer $pipe) : self

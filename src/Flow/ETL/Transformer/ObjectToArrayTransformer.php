@@ -16,10 +16,15 @@ use Laminas\Hydrator\HydratorInterface;
  */
 final class ObjectToArrayTransformer implements Transformer
 {
+    private HydratorInterface $hydrator;
+    private string $objectEntryName;
+
     public function __construct(
-        private readonly HydratorInterface $hydrator,
-        private readonly string $objectEntryName
+        HydratorInterface $hydrator,
+        string $objectEntryName
     ) {
+        $this->hydrator = $hydrator;
+        $this->objectEntryName = $objectEntryName;
     }
 
     public function __serialize() : array

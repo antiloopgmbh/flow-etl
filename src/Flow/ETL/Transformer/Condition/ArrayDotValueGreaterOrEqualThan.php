@@ -10,11 +10,18 @@ use Flow\ETL\Row;
 
 final class ArrayDotValueGreaterOrEqualThan implements RowCondition
 {
+    private string $arrayEntryName;
+    private string $path;
+    private $value;
+
     public function __construct(
-        private readonly string $arrayEntryName,
-        private readonly string $path,
-        private readonly mixed $value
+        string $arrayEntryName,
+        string $path,
+        $value
     ) {
+        $this->arrayEntryName = $arrayEntryName;
+        $this->path = $path;
+        $this->value = $value;
     }
 
     public function isMetFor(Row $row) : bool

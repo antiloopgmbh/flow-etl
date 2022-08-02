@@ -15,10 +15,15 @@ use Flow\ETL\Transformer;
  */
 final class ArraySortTransformer implements Transformer
 {
+    private string $arrayEntryName;
+    private int $sortingFlag;
+
     public function __construct(
-        private readonly string $arrayEntryName,
-        private readonly int $sortingFlag = \SORT_REGULAR
+        string $arrayEntryName,
+        int $sortingFlag = \SORT_REGULAR
     ) {
+        $this->arrayEntryName = $arrayEntryName;
+        $this->sortingFlag = $sortingFlag;
     }
 
     public function __serialize() : array

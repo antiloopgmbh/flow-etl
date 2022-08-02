@@ -16,12 +16,25 @@ use Flow\ETL\Transformer\Math\Operation;
  */
 final class MathValueOperationTransformer implements Transformer
 {
+    private string $leftEntry;
+    private $rightValue;
+    private $operation;
+    private string $newEntryName;
+
+    /**
+     * @param float|int $rightValue
+     * @param Operation|string $operation
+     */
     private function __construct(
-        private readonly string $leftEntry,
-        private readonly int|float $rightValue,
-        private readonly Operation|string $operation,
-        private readonly string $newEntryName
+        string $leftEntry,
+        $rightValue,
+        $operation,
+        string $newEntryName
     ) {
+        $this->leftEntry = $leftEntry;
+        $this->rightValue = $rightValue;
+        $this->operation = $operation;
+        $this->newEntryName = $newEntryName;
     }
 
     public static function add(string $leftEntry, int|float $rightValue, string $newEntryName = 'add') : self

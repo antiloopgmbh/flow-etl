@@ -14,14 +14,21 @@ use Flow\ETL\Row\Schema\Definition;
  */
 final class FloatEntry implements \Stringable, Entry
 {
+    private string $name;
+    private float $value;
+    private int $precision;
+
     /**
      * @throws InvalidArgumentException
      */
-    public function __construct(private readonly string $name, private readonly float $value, private readonly int $precision = 6)
+    public function __construct(string $name, float $value, int $precision = 6)
     {
         if (!\strlen($name)) {
             throw InvalidArgumentException::because('Entry name cannot be empty');
         }
+        $this->name = $name;
+        $this->value = $value;
+        $this->precision = $precision;
     }
 
     public static function from(string $name, float|int|string $value) : self

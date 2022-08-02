@@ -15,7 +15,7 @@ final class All implements Constraint
     /**
      * @var array<Constraint>
      */
-    private readonly array $constraints;
+    private array $constraints;
 
     public function __construct(Constraint ...$constraints)
     {

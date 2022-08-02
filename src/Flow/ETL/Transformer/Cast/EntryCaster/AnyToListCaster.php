@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Transformer\Cast\EntryCaster;
 
+use Flow\ETL\Exception\InvalidArgumentException;
 use Flow\ETL\Exception\RuntimeException;
 use Flow\ETL\Row\Entry;
 use Flow\ETL\Row\Entry\TypedCollection\ObjectType;
@@ -23,8 +24,13 @@ use Flow\ETL\Transformer\Cast\ValueCaster\StringToDateTimeCaster;
  */
 final class AnyToListCaster implements EntryConverter
 {
-    public function __construct(private readonly Type $type, private readonly ?ValueConverter $valueConverter = null)
+    private Type $type;
+    private ?ValueConverter $valueConverter;
+
+    public function __construct(Type $type, ?ValueConverter $valueConverter = null)
     {
+        $this->type = $type;
+        $this->valueConverter = $valueConverter;
     }
 
     public function __serialize() : array
@@ -62,12 +68,18 @@ final class AnyToListCaster implements EntryConverter
                     /** @var ScalarType $type */
                     $type = $this->type;
 
-                    return match ($type) {
-                        ScalarType::integer => (new AnyToIntegerCaster())->convert($value),
-                        ScalarType::string => (new AnyToStringCaster())->convert($value),
-                        ScalarType::boolean => (new AnyToBooleanCaster())->convert($value),
-                        ScalarType::float => (new AnyToFloatCaster())->convert($value),
-                    };
+                    switch ($type) {
+                        case ScalarType::integer:
+                            return (new AnyToIntegerCaster())->convert($value);
+                        case ScalarType::string:
+                            return (new AnyToStringCaster())->convert($value);
+                        case ScalarType::boolean:
+                            return (new AnyToBooleanCaster())->convert($value);
+                        case ScalarType::float:
+                            return (new AnyToFloatCaster())->convert($value);
+                        default:
+                            throw new InvalidArgumentException("Unsupported scalar type: {$type}");
+                    }
                 },
                 (array) $entry->value()
             )

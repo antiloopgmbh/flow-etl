@@ -17,11 +17,13 @@ use Flow\ETL\Transformer;
  */
 final class CollectingPipeline implements Pipeline
 {
-    private readonly Pipeline $nextPipeline;
+    private Pipeline $nextPipeline;
+    private Pipeline $pipeline;
 
-    public function __construct(private readonly Pipeline $pipeline)
+    public function __construct(Pipeline $pipeline)
     {
         $this->nextPipeline = $pipeline->cleanCopy();
+        $this->pipeline = $pipeline;
     }
 
     public function add(Loader|Transformer $pipe) : self

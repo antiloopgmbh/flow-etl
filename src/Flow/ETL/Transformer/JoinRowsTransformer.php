@@ -18,12 +18,18 @@ use Flow\ETL\Transformer;
 final class JoinRowsTransformer implements Transformer
 {
     private ?Rows $rows = null;
+    private DataFrame $dataFrame;
+    private Condition $condition;
+    private Join $type;
 
     private function __construct(
-        private readonly DataFrame $dataFrame,
-        private readonly Condition $condition,
-        private readonly Join $type
+        DataFrame $dataFrame,
+        Condition $condition,
+        Join $type
     ) {
+        $this->dataFrame = $dataFrame;
+        $this->condition = $condition;
+        $this->type = $type;
     }
 
     /**

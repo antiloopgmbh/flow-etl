@@ -15,15 +15,17 @@ if (!\class_exists(\Symfony\Component\Validator\Validation::class)) {
 
 final class SymfonyValidator implements Validator
 {
-    private readonly ValidatorInterface $validator;
+    private ValidatorInterface $validator;
+    private array $constraints;
 
     /**
      * @param array<Constraint> $constraints
      * @param null|ValidatorInterface $validator
      */
-    public function __construct(private readonly array $constraints = [], ValidatorInterface $validator = null)
+    public function __construct(array $constraints = [], ValidatorInterface $validator = null)
     {
         $this->validator = $validator ?: Validation::createValidator();
+        $this->constraints = $constraints;
     }
 
     /**

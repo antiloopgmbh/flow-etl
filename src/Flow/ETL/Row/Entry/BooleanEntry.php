@@ -14,14 +14,19 @@ use Flow\ETL\Row\Schema\Definition;
  */
 final class BooleanEntry implements \Stringable, Entry
 {
+    private string $name;
+    private bool $value;
+
     /**
      * @throws InvalidArgumentException
      */
-    public function __construct(private readonly string $name, private readonly bool $value)
+    public function __construct(string $name, bool $value)
     {
         if (!\strlen($name)) {
             throw InvalidArgumentException::because('Entry name cannot be empty');
         }
+        $this->name = $name;
+        $this->value = $value;
     }
 
     public static function from(string $name, bool|int|string $value) : self

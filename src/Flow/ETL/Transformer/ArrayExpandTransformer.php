@@ -18,11 +18,18 @@ use Flow\ETL\Transformer;
  */
 final class ArrayExpandTransformer implements Transformer
 {
+    private string $arrayEntryName;
+    private string $expandEntryName;
+    private EntryFactory $entryFactory;
+
     public function __construct(
-        private readonly string $arrayEntryName,
-        private readonly string $expandEntryName = 'element',
-        private readonly EntryFactory $entryFactory = new NativeEntryFactory()
+        string $arrayEntryName,
+        string $expandEntryName = 'element',
+        EntryFactory $entryFactory = null
     ) {
+        $this->arrayEntryName = $arrayEntryName;
+        $this->expandEntryName = $expandEntryName;
+        $this->entryFactory = $entryFactory ?? new NativeEntryFactory();
     }
 
     public function __serialize() : array

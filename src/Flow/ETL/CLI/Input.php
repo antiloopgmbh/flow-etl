@@ -6,11 +6,14 @@ namespace Flow\ETL\CLI;
 
 final class Input
 {
+    private array $argv;
+
     /**
      * @param array<string> $argv
      */
-    public function __construct(private readonly array $argv)
+    public function __construct(array $argv)
     {
+        $this->argv = $argv;
     }
 
     /**

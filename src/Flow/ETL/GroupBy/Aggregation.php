@@ -16,6 +16,9 @@ use Flow\ETL\GroupBy\Aggregator\Sum;
 
 final class Aggregation
 {
+    private string $type;
+    private string $entry;
+
     /**
      * @param string $type
      * @param string $entry
@@ -23,12 +26,14 @@ final class Aggregation
      * @throws InvalidArgumentException
      */
     public function __construct(
-        private readonly string $type,
-        private readonly string $entry
+        string $type,
+        string $entry
     ) {
         if (!\in_array($type, ['avg', 'count', 'max', 'min', 'sum', 'first', 'last'], true)) {
             throw new InvalidArgumentException("Unknown aggregation \"{$type}\", expected one of: 'avg', 'count', 'max', 'min', 'sum', 'first', 'last'");
         }
+        $this->type = $type;
+        $this->entry = $entry;
     }
 
     public static function avg(string $entry) : self
@@ -68,16 +73,24 @@ final class Aggregation
 
     public function create() : Aggregator
     {
-        return match ($this->type) {
-            'avg' => new Average($this->entry),
-            'count' => new Count($this->entry),
-            'max' => new Max($this->entry),
-            'min' => new Min($this->entry),
-            'sum' => new Sum($this->entry),
-            'first' => new First($this->entry),
-            'last' => new Last($this->entry),
-            default => throw new RuntimeException("Unknown aggregation \"{$this->type}\", expected one of: 'avg', 'count', 'max', 'min', 'sum'"),
-        };
+        switch ($this->type) {
+            case 'avg':
+                return new Average($this->entry);
+            case 'count':
+                return new Count($this->entry);
+            case 'max':
+                return new Max($this->entry);
+            case 'min':
+                return new Min($this->entry);
+            case 'sum':
+                return new Sum($this->entry);
+            case 'first':
+                return new First($this->entry);
+            case 'last':
+                return new Last($this->entry);
+            default:
+                throw new RuntimeException("Unknown aggregation \"{$this->type}\", expected one of: 'avg', 'count', 'max', 'min', 'sum'");
+        }
     }
 
     public function entry() : string

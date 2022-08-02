@@ -16,11 +16,15 @@ final class BufferCache
      * @var array<string, Rows>
      */
     private array $buffers = [];
+    private Cache $overflowCache;
+    private int $bufferSize;
 
     public function __construct(
-        private readonly Cache $overflowCache,
-        private readonly int $bufferSize
+        Cache $overflowCache,
+        int $bufferSize
     ) {
+        $this->overflowCache = $overflowCache;
+        $this->bufferSize = $bufferSize;
     }
 
     public function add(string $id, Rows $rows) : void

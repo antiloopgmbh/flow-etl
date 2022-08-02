@@ -15,10 +15,15 @@ use Flow\ETL\Transformer;
  */
 final class ArrayCollectionMergeTransformer implements Transformer
 {
+    private string $arrayEntryName;
+    private string $newEntryName;
+
     public function __construct(
-        private readonly string $arrayEntryName,
-        private readonly string $newEntryName = 'element'
+        string $arrayEntryName,
+        string $newEntryName = 'element'
     ) {
+        $this->arrayEntryName = $arrayEntryName;
+        $this->newEntryName = $newEntryName;
     }
 
     public function __serialize() : array

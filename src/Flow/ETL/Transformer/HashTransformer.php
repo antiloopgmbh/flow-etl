@@ -16,6 +16,10 @@ use Flow\ETL\Transformer;
  */
 final class HashTransformer implements Transformer
 {
+    private array $entries;
+    private string $algorithm;
+    private string $newEntryName;
+
     /**
      * @psalm-suppress ImpureFunctionCall
      *
@@ -24,13 +28,16 @@ final class HashTransformer implements Transformer
      * @throws InvalidArgumentException
      */
     public function __construct(
-        private readonly array $entries,
-        private readonly string $algorithm,
-        private readonly string $newEntryName = 'hash'
+        array $entries,
+        string $algorithm,
+        string $newEntryName = 'hash'
     ) {
         if (!\in_array($algorithm, \hash_algos(), true)) {
             throw new InvalidArgumentException("Unexpected hash algorithm: {$algorithm}");
         }
+        $this->entries = $entries;
+        $this->algorithm = $algorithm;
+        $this->newEntryName = $newEntryName;
     }
 
     public function __serialize() : array

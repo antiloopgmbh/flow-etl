@@ -17,13 +17,15 @@ final class CastedRowsFactory implements RowsFactory
     /**
      * @var array<RowConverter>
      */
-    private readonly array $castEntries;
+    private array $castEntries;
+    private RowsFactory $factory;
 
     public function __construct(
-        private readonly RowsFactory $factory,
+        RowsFactory $factory,
         RowConverter ...$castEntries
     ) {
         $this->castEntries = $castEntries;
+        $this->factory = $factory;
     }
 
     public function __serialize() : array

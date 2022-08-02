@@ -10,8 +10,14 @@ use Flow\ETL\Rows;
 
 final class SchemaValidationException extends RuntimeException
 {
-    public function __construct(private readonly Schema $schema, private readonly Rows $rows)
+    private Schema $schema;
+    private Rows $rows;
+
+    public function __construct(Schema $schema, Rows $rows)
     {
+        $this->schema = $schema;
+        $this->rows = $rows;
+
         $schema = (new ASCIISchemaFormatter())->format($this->schema);
         $rowsSchema = (new ASCIISchemaFormatter())->format($rows->schema());
 

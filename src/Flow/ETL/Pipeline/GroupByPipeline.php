@@ -13,17 +13,18 @@ use Flow\ETL\Transformer;
 
 final class GroupByPipeline implements Pipeline
 {
-    private readonly Pipeline $nextPipeline;
+    private Pipeline $nextPipeline;
+    private Pipeline $pipeline;
+    private GroupBy $groupBy;
 
-    private readonly Pipeline $pipeline;
-
-    public function __construct(private readonly GroupBy $groupBy, Pipeline $pipeline)
+    public function __construct(GroupBy $groupBy, Pipeline $pipeline)
     {
         /** @phpstan-ignore-next-line */
         $existingPipeline = $pipeline instanceof self ? $pipeline->pipeline : $pipeline;
 
         $this->pipeline = $existingPipeline;
         $this->nextPipeline = $existingPipeline->cleanCopy();
+        $this->groupBy = $groupBy;
     }
 
     public function add(Loader|Transformer $pipe) : self

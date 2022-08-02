@@ -18,6 +18,13 @@ use Flow\ETL\Stream\Mode;
  */
 final class StreamLoader implements Loader
 {
+    private string $url;
+    private Mode $mode;
+    private $truncate;
+    private Output $output;
+    private Formatter $formatter;
+    private SchemaFormatter $schemaFormatter;
+
     /**
      * @param string $url all protocols supported by PHP are allowed https://www.php.net/manual/en/wrappers.php
      * @param Mode $mode only writing modes explained in https://www.php.net/manual/en/function.fopen.php are supported
@@ -25,13 +32,19 @@ final class StreamLoader implements Loader
      * @param Formatter $formatter - if not passed AsciiTableFormatter is used
      */
     public function __construct(
-        private readonly string $url,
-        private readonly Mode $mode = Mode::WRITE,
-        private readonly int|bool $truncate = 20,
-        private readonly Output $output = Output::rows,
-        private readonly Formatter $formatter = new Formatter\AsciiTableFormatter(),
-        private readonly SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()
+        string $url,
+        Mode $mode = Mode::WRITE,
+        $truncate = 20,
+        Output $output = Output::rows,
+        Formatter $formatter = null,
+        SchemaFormatter $schemaFormatter = null
     ) {
+        $this->url = $url;
+        $this->mode = $mode;
+        $this->truncate = $truncate;
+        $this->output = $output;
+        $this->formatter = $formatter ?? new Formatter\AsciiTableFormatter();
+        $this->schemaFormatter = $schemaFormatter ?? new ASCIISchemaFormatter();
     }
 
     public static function output(int|bool $truncate = 20, Output $output = Output::rows, Formatter $formatter = new Formatter\AsciiTableFormatter(), SchemaFormatter $schemaFormatter = new ASCIISchemaFormatter()) : self

@@ -12,10 +12,15 @@ use Flow\ETL\Rows;
  */
 final class BufferExtractor implements Extractor
 {
+    private Extractor $extractor;
+    private int $maxRowsSize;
+
     public function __construct(
-        private readonly Extractor $extractor,
-        private readonly int $maxRowsSize
+        Extractor $extractor,
+        int $maxRowsSize
     ) {
+        $this->extractor = $extractor;
+        $this->maxRowsSize = $maxRowsSize;
     }
 
     /**

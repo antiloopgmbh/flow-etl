@@ -10,12 +10,21 @@ use Flow\ETL\Row;
 
 final class ArrayDotValueEqualsTo implements RowCondition
 {
+    private string $arrayEntryName;
+    private string $path;
+    private $value;
+    private bool $identical;
+
     public function __construct(
-        private readonly string $arrayEntryName,
-        private readonly string $path,
-        private readonly mixed $value,
-        private readonly bool $identical = true
+        string $arrayEntryName,
+        string $path,
+        $value,
+        bool $identical = true
     ) {
+        $this->arrayEntryName = $arrayEntryName;
+        $this->path = $path;
+        $this->value = $value;
+        $this->identical = $identical;
     }
 
     public function isMetFor(Row $row) : bool

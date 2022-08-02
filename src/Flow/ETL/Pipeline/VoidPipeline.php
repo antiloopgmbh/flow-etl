@@ -13,8 +13,11 @@ use Flow\ETL\Transformer;
 
 final class VoidPipeline implements Pipeline
 {
-    public function __construct(private readonly Pipeline $pipeline)
+    private Pipeline $pipeline;
+
+    public function __construct(Pipeline $pipeline)
     {
+        $this->pipeline = $pipeline;
     }
 
     public function add(Loader|Transformer $pipe) : self

@@ -24,6 +24,8 @@ final class RemoteFile implements FileStream
      * }
      */
     private array $urlParts;
+    private string $uri;
+    private array $options;
 
     /**
      * @param string $uri
@@ -31,7 +33,7 @@ final class RemoteFile implements FileStream
      *
      * @throws InvalidArgumentException
      */
-    public function __construct(private readonly string $uri, private readonly array $options = [])
+    public function __construct(string $uri, array $options = [])
     {
         $urlParts = \parse_url($uri);
 
@@ -56,6 +58,8 @@ final class RemoteFile implements FileStream
         }
 
         $this->urlParts = $urlParts;
+        $this->uri = $uri;
+        $this->options = $options;
     }
 
     public function __serialize() : array

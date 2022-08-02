@@ -19,7 +19,9 @@ use Jawira\CaseConverter\Convert;
  */
 final class EntryNameStyleConverterTransformer implements Transformer
 {
-    public function __construct(private readonly string $style)
+    private string $style;
+
+    public function __construct(string $style)
     {
         /** @psalm-suppress ImpureFunctionCall */
         if (!\class_exists(Convert::class)) {
@@ -29,6 +31,7 @@ final class EntryNameStyleConverterTransformer implements Transformer
         if (!\in_array($style, StringStyles::ALL, true)) {
             throw new InvalidArgumentException("Unrecognized style {$style}, please use one of following: " . \implode(', ', StringStyles::ALL));
         }
+        $this->style = $style;
     }
 
     public function __serialize() : array

@@ -8,8 +8,11 @@ use Flow\ETL\Row;
 
 final class Opposite implements RowCondition
 {
-    public function __construct(private readonly RowCondition $condition)
+    private RowCondition $condition;
+
+    public function __construct(RowCondition $condition)
     {
+        $this->condition = $condition;
     }
 
     public function isMetFor(Row $row) : bool

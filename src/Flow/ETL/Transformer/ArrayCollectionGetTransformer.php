@@ -18,15 +18,21 @@ use Flow\ETL\Transformer;
 final class ArrayCollectionGetTransformer implements Transformer
 {
     private string $index = '*';
+    private array $keys;
+    private string $arrayEntryName;
+    private string $newEntryName;
 
     /**
      * @param array<string> $keys
      */
     public function __construct(
-        private readonly array $keys,
-        private readonly string $arrayEntryName,
-        private readonly string $newEntryName = 'element'
+        array $keys,
+        string $arrayEntryName,
+        string $newEntryName = 'element'
     ) {
+        $this->keys = $keys;
+        $this->arrayEntryName = $arrayEntryName;
+        $this->newEntryName = $newEntryName;
     }
 
     /**

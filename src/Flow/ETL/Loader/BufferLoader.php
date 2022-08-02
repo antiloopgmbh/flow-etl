@@ -14,10 +14,14 @@ use Flow\ETL\Rows;
 final class BufferLoader implements Closure, Loader
 {
     private Rows $buffer;
+    private Loader $overflowLoader;
+    private int $bufferSize;
 
-    public function __construct(private readonly Loader $overflowLoader, private readonly int $bufferSize)
+    public function __construct(Loader $overflowLoader, int $bufferSize)
     {
         $this->buffer = new Rows();
+        $this->overflowLoader = $overflowLoader;
+        $this->bufferSize = $bufferSize;
     }
 
     public function __serialize() : array

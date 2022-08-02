@@ -19,6 +19,10 @@ use Flow\ETL\Row\Schema\Metadata;
  */
 final class ListEntry implements Entry, TypedCollection
 {
+    private string $name;
+    private Type $type;
+    private array $value;
+
     /**
      * @param string $name
      * @param Type $type
@@ -27,9 +31,9 @@ final class ListEntry implements Entry, TypedCollection
      * @throws InvalidArgumentException
      */
     public function __construct(
-        private readonly string $name,
-        private readonly Type $type,
-        private readonly array $value
+        string $name,
+        Type $type,
+        array $value
     ) {
         if (!\strlen($name)) {
             throw InvalidArgumentException::because('Entry name cannot be empty');
@@ -42,6 +46,9 @@ final class ListEntry implements Entry, TypedCollection
         if (!$type->isValid($value)) {
             throw new InvalidArgumentException('Expected list of ' . $type->toString() . ' got different types.');
         }
+        $this->name = $name;
+        $this->type = $type;
+        $this->value = $value;
     }
 
     public function __serialize() : array

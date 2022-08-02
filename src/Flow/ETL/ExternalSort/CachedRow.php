@@ -10,10 +10,15 @@ use Flow\ETL\Rows;
 
 final class CachedRow
 {
+    private Row $row;
+    private string $cacheId;
+
     public function __construct(
-        private readonly Row $row,
-        private readonly string $cacheId
+        Row $row,
+        string $cacheId
     ) {
+        $this->row = $row;
+        $this->cacheId = $cacheId;
     }
 
     public static function fromRows(Rows $rows, string $cacheId) : self

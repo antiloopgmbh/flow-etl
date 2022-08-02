@@ -16,6 +16,8 @@ use Flow\ETL\Row\Schema\Definition;
 final class JsonEntry implements \Stringable, Entry
 {
     private bool $object;
+    private string $name;
+    private array $value;
 
     /**
      * JsonEntry constructor.
@@ -24,13 +26,15 @@ final class JsonEntry implements \Stringable, Entry
      *
      * @throws InvalidArgumentException
      */
-    public function __construct(private readonly string $name, private readonly array $value)
+    public function __construct(string $name, array $value)
     {
         if (!\strlen($name)) {
             throw InvalidArgumentException::because('Entry name cannot be empty');
         }
 
         $this->object = false;
+        $this->name = $name;
+        $this->value = $value;
     }
 
     /**

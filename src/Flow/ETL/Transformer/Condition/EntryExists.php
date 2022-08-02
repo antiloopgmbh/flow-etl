@@ -8,8 +8,11 @@ use Flow\ETL\Row;
 
 final class EntryExists implements RowCondition
 {
-    public function __construct(private readonly string $entryName)
+    private string $entryName;
+
+    public function __construct(string $entryName)
     {
+        $this->entryName = $entryName;
     }
 
     public function isMetFor(Row $row) : bool

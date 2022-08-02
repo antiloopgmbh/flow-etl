@@ -24,6 +24,9 @@ use Flow\Serializer\Serializer;
  */
 final class Message implements Serializable
 {
+    private string $type;
+    private array $payload;
+
     /**
      * @param string $type
      * @param array{
@@ -34,8 +37,10 @@ final class Message implements Serializable
      *     rows?: Rows
      * } $payload
      */
-    private function __construct(private string $type, private array $payload)
+    private function __construct(string $type, array $payload)
     {
+        $this->type = $type;
+        $this->payload = $payload;
     }
 
     public static function fetch(string $id) : self

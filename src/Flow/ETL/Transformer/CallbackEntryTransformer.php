@@ -22,7 +22,7 @@ final class CallbackEntryTransformer implements Transformer
      * @psalm-var array<pure-callable(Entry) : Entry>
      * @phpstan-var array<callable(Entry) : Entry>
      */
-    private readonly array $callables;
+    private array $callables;
 
     /**
      * @psalm-param pure-callable(Entry) : Entry ...$callables

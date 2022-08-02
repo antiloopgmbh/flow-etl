@@ -14,10 +14,15 @@ use Flow\ETL\Rows;
  */
 final class PipelineExtractor implements Extractor
 {
+    private Pipeline $pipeline;
+    private Config $config;
+
     public function __construct(
-        private readonly Pipeline $pipeline,
-        private readonly Config $config
+        Pipeline $pipeline,
+        Config $config
     ) {
+        $this->pipeline = $pipeline;
+        $this->config = $config;
     }
 
     /**

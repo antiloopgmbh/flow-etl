@@ -14,10 +14,15 @@ use Flow\ETL\Transformer;
  */
 final class CloneEntryTransformer implements Transformer
 {
+    private string $from;
+    private string $to;
+
     public function __construct(
-        private readonly string $from,
-        private readonly string $to
+        string $from,
+        string $to
     ) {
+        $this->from = $from;
+        $this->to = $to;
     }
 
     public function __serialize() : array

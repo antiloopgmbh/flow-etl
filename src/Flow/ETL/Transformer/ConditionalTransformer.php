@@ -14,10 +14,15 @@ use Flow\ETL\Transformer;
  */
 final class ConditionalTransformer implements Transformer
 {
+    private Condition\RowCondition $condition;
+    private Transformer $transformer;
+
     public function __construct(
-        private readonly Transformer\Condition\RowCondition $condition,
-        private readonly Transformer $transformer
+        Transformer\Condition\RowCondition $condition,
+        Transformer $transformer
     ) {
+        $this->condition = $condition;
+        $this->transformer = $transformer;
     }
 
     public function __serialize() : array

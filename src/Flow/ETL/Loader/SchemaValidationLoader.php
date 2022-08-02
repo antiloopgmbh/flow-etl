@@ -15,10 +15,15 @@ use Flow\ETL\SchemaValidator;
  */
 final class SchemaValidationLoader implements Loader
 {
+    private Schema $schema;
+    private SchemaValidator $validator;
+
     public function __construct(
-        private readonly Schema $schema,
-        private readonly SchemaValidator $validator
+        Schema $schema,
+        SchemaValidator $validator
     ) {
+        $this->schema = $schema;
+        $this->validator = $validator;
     }
 
     public function __serialize() : array

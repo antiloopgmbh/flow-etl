@@ -13,8 +13,11 @@ use Flow\ETL\Row\Schema\Constraint;
  */
 final class CollectionType implements Constraint
 {
-    public function __construct(private readonly Type $type)
+    private Type $type;
+
+    public function __construct(Type $type)
     {
+        $this->type = $type;
     }
 
     public function __serialize() : array

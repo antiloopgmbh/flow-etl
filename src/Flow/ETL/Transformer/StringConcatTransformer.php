@@ -14,14 +14,21 @@ use Flow\ETL\Transformer;
  */
 final class StringConcatTransformer implements Transformer
 {
+    private array $stringEntryNames;
+    private string $glue;
+    private string $newEntryName;
+
     /**
      * @param array<string> $stringEntryNames
      */
     public function __construct(
-        private readonly array $stringEntryNames,
-        private readonly string $glue = ' ',
-        private readonly string $newEntryName = 'element'
+        array $stringEntryNames,
+        string $glue = ' ',
+        string $newEntryName = 'element'
     ) {
+        $this->stringEntryNames = $stringEntryNames;
+        $this->glue = $glue;
+        $this->newEntryName = $newEntryName;
     }
 
     public function __serialize() : array

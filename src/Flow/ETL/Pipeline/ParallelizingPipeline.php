@@ -17,17 +17,21 @@ use Flow\ETL\Transformer;
  */
 final class ParallelizingPipeline implements Pipeline
 {
-    private readonly Pipeline $nextPipeline;
+    private Pipeline $nextPipeline;
+    private Pipeline $pipeline;
+    private int $parallel;
 
     public function __construct(
-        private readonly Pipeline $pipeline,
-        private readonly int $parallel
+        Pipeline $pipeline,
+        int $parallel
     ) {
         if ($parallel < 1) {
             throw new InvalidArgumentException("Parallel value can't be lower than 1.");
         }
 
         $this->nextPipeline = $pipeline->cleanCopy();
+        $this->pipeline = $pipeline;
+        $this->parallel = $parallel;
     }
 
     public function add(Loader|Transformer $pipe) : self

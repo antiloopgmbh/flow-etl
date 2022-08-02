@@ -8,11 +8,21 @@ use Flow\ETL\Row;
 
 final class EntryValueEqualsTo implements RowCondition
 {
+    private string $entryName;
+    private $value;
+    private bool $identical;
+
+    /**
+     * @param mixed $value
+     */
     public function __construct(
-        private readonly string $entryName,
-        private readonly mixed $value,
-        private readonly bool $identical = true
+        string $entryName,
+        $value,
+        bool $identical = true
     ) {
+        $this->entryName = $entryName;
+        $this->value = $value;
+        $this->identical = $identical;
     }
 
     public function isMetFor(Row $row) : bool

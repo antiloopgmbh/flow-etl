@@ -15,10 +15,14 @@ use Psr\Log\LoggerInterface;
 final class Processor
 {
     private Pipes $pipes;
+    private string $workerId;
+    private LoggerInterface $logger;
 
-    public function __construct(private readonly string $workerId, private readonly LoggerInterface $logger)
+    public function __construct(string $workerId, LoggerInterface $logger)
     {
         $this->pipes = Pipes::empty();
+        $this->workerId = $workerId;
+        $this->logger = $logger;
     }
 
     public function process(Rows $rows) : Rows

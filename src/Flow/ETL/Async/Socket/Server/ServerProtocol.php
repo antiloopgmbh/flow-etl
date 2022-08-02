@@ -20,14 +20,25 @@ final class ServerProtocol
      * @return \Generator<int, Rows, mixed, void>
      */
     private \Generator $generator;
+    private Config $config;
+    private string $cacheId;
+    private Pool $workers;
+    private Extractor $extractor;
+    private Pipes $pipes;
 
     public function __construct(
-        private readonly Config $config,
-        private readonly string $cacheId,
-        private readonly Pool $workers,
-        private readonly Extractor $extractor,
-        private readonly Pipes $pipes
+        Config $config,
+        string $cacheId,
+        Pool $workers,
+        Extractor $extractor,
+        Pipes $pipes
     ) {
+        $this->config = $config;
+        $this->cacheId = $cacheId;
+        $this->workers = $workers;
+        $this->extractor = $extractor;
+        $this->pipes = $pipes;
+
         $this->generator = $this->extractor->extract();
     }
 

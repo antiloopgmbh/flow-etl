@@ -14,8 +14,13 @@ use Flow\ETL\Row\ValueConverter;
  */
 class CastArrayEntryEach implements RowConverter
 {
-    public function __construct(private string $arrayEntryName, private ValueConverter $caster)
+    private string $arrayEntryName;
+    private ValueConverter $caster;
+
+    public function __construct(string $arrayEntryName, ValueConverter $caster)
     {
+        $this->arrayEntryName = $arrayEntryName;
+        $this->caster = $caster;
     }
 
     public function __serialize() : array

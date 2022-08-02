@@ -16,7 +16,7 @@ final class RowsMinHeap extends \SplMinHeap
     /**
      * @var Sort[]
      */
-    private readonly array $entries;
+    private array $entries;
 
     public function __construct(Sort ...$entries)
     {

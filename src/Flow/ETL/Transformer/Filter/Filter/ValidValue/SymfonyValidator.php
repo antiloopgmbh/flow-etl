@@ -24,7 +24,7 @@ final class SymfonyValidator implements Validator
      * @param array<Constraint> $constraints
      * @param null|ValidatorInterface $validator
      */
-    public function __construct(private array $constraints = [], ValidatorInterface $validator = null)
+    public function __construct(array $constraints = [], ValidatorInterface $validator = null)
     {
         $this->validator = $validator ?: Validation::createValidator();
     }

@@ -7,10 +7,12 @@ namespace Flow\ETL\Async\Socket\Worker\Pool;
 final class Worker
 {
     private WorkerStatus $status;
+    private string $id;
 
-    public function __construct(private readonly string $id)
+    public function __construct(string $id)
     {
         $this->status = WorkerStatus::new;
+        $this->id = $id;
     }
 
     public function connect() : void

@@ -20,7 +20,7 @@ final class ArrayDotRenameTransformer implements Transformer
     /**
      * @var ArrayKeyRename[]
      */
-    private readonly array $arrayKeyRenames;
+    private array $arrayKeyRenames;
 
     public function __construct(ArrayKeyRename ...$arrayKeyRenames)
     {

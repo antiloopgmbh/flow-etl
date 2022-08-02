@@ -9,8 +9,11 @@ namespace Flow\ETL\Stream;
  */
 final class LocalFile implements FileStream
 {
-    public function __construct(private string $path)
+    private string $path;
+
+    public function __construct(string $path)
     {
+        $this->path = $path;
     }
 
     public function __serialize() : array

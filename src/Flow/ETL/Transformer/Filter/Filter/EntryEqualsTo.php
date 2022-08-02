@@ -13,10 +13,18 @@ use Flow\ETL\Transformer\Filter\Filter;
  */
 final class EntryEqualsTo implements Filter
 {
+    private string $entryName;
+    private $entryValue;
+
+    /**
+     * @param mixed $entryValue
+     */
     public function __construct(
-        private string $entryName,
-        private mixed $entryValue
+        string $entryName,
+        $entryValue
     ) {
+        $this->entryName = $entryName;
+        $this->entryValue = $entryValue;
     }
 
     public function __serialize() : array

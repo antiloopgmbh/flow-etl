@@ -12,10 +12,12 @@ use Flow\ETL\Row\Entry;
 final class Sum implements Aggregator
 {
     private float $sum;
+    private string $entry;
 
-    public function __construct(private readonly string $entry)
+    public function __construct(string $entry)
     {
         $this->sum = 0;
+        $this->entry = $entry;
     }
 
     public function aggregate(Row $row) : void

@@ -17,8 +17,11 @@ use Flow\ETL\Transformer\RemoveEntriesTransformer;
  */
 final class ArrayRowsFactory implements RowsFactory
 {
-    public function __construct(private readonly ?Schema $schema = null)
+    private ?Schema $schema;
+
+    public function __construct(?Schema $schema = null)
     {
+        $this->schema = $schema;
     }
 
     public function __serialize() : array

@@ -21,10 +21,14 @@ use Jawira\CaseConverter\Convert;
  */
 final class ArrayKeysStyleConverterTransformer implements Transformer
 {
+    private string $arrayEntryName;
+    private string $style;
+    private EntryFactory $entryFactory;
+
     public function __construct(
-        private readonly string $arrayEntryName,
-        private readonly string $style,
-        private readonly EntryFactory $entryFactory = new NativeEntryFactory()
+        string $arrayEntryName,
+        string $style,
+        EntryFactory $entryFactory = null
     ) {
         /** @psalm-suppress ImpureFunctionCall */
         if (!\class_exists(\Jawira\CaseConverter\Convert::class)) {
@@ -34,6 +38,9 @@ final class ArrayKeysStyleConverterTransformer implements Transformer
         if (!\in_array($style, StringStyles::ALL, true)) {
             throw new InvalidArgumentException("Unrecognized style {$style}, please use one of following: " . \implode(', ', StringStyles::ALL));
         }
+        $this->arrayEntryName = $arrayEntryName;
+        $this->style = $style;
+        $this->entryFactory = $entryFactory ?? new NativeEntryFactory();
     }
 
     public function __serialize() : array

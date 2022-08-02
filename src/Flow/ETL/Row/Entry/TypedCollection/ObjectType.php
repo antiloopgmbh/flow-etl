@@ -12,10 +12,14 @@ use Flow\ETL\Exception\InvalidArgumentException;
 final class ObjectType implements Type
 {
     /**
-     * @param class-string $class
+     * @var string
      */
-    public function __construct(public readonly string $class)
+    private $class;
+
+    public function __construct(string $class)
     {
+        $this->class = $class;
+
         /** @psalm-suppress ImpureFunctionCall */
         if (!\class_exists($class) && !\interface_exists($this->class)) {
             throw new InvalidArgumentException("Class {$class} not found");
@@ -23,7 +27,7 @@ final class ObjectType implements Type
     }
 
     /**
-     * @param class-string $class
+     * @param string $class
      */
     public static function of(string $class) : self
     {

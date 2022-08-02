@@ -16,11 +16,13 @@ final class ClientProtocol
     private Cache $cache;
 
     private string $cacheId;
+    private Processor $processor;
 
-    public function __construct(private readonly Processor $processor)
+    public function __construct(Processor $processor)
     {
         $this->cache = new InMemoryCache();
         $this->cacheId = \uniqid('flow_async_pipeline', true);
+        $this->processor = $processor;
     }
 
     public function handle(string $id, Message $message, Server $server) : void

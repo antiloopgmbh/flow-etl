@@ -21,13 +21,15 @@ final class StringEntryValueCaseConverterTransformer implements Transformer
     /**
      * @var string[]
      */
-    private readonly array $entryNames;
+    private array $entryNames;
+    private string $case;
 
     private function __construct(
-        private readonly string $case,
+        string $case,
         string ...$entryNames
     ) {
         $this->entryNames = $entryNames;
+        $this->case = $case;
     }
 
     public static function lower(string ...$entryNames) : self

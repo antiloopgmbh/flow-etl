@@ -13,10 +13,15 @@ use Flow\ETL\Row\Schema\Definition;
  */
 final class EnumEntry implements Entry
 {
+    private string $name;
+    private \UnitEnum $value;
+
     public function __construct(
-        private readonly string $name,
-        private readonly \UnitEnum $value
+        string $name,
+        \UnitEnum $value
     ) {
+        $this->name = $name;
+        $this->value = $value;
     }
 
     public function __serialize() : array

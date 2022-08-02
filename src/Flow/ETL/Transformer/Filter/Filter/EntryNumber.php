@@ -13,8 +13,11 @@ use Flow\ETL\Transformer\Filter\Filter;
  */
 final class EntryNumber implements Filter
 {
-    public function __construct(private string $entryName)
+    private string $entryName;
+
+    public function __construct(string $entryName)
     {
+        $this->entryName = $entryName;
     }
 
     public function __serialize() : array

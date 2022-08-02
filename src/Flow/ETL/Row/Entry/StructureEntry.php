@@ -18,18 +18,20 @@ final class StructureEntry implements \Stringable, Entry
     /**
      * @var array<Entry>
      */
-    private readonly array $entries;
+    private array $entries;
+    private string $name;
 
     /**
      * @throws InvalidArgumentException
      */
-    public function __construct(private readonly string $name, Entry ...$entries)
+    public function __construct(string $name, Entry ...$entries)
     {
         if (!\strlen($name)) {
             throw InvalidArgumentException::because('Entry name cannot be empty');
         }
 
         $this->entries = $entries;
+        $this->name = $name;
     }
 
     public function __serialize() : array

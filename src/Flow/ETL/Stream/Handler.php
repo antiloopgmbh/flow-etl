@@ -8,10 +8,15 @@ use Flow\ETL\Exception\RuntimeException;
 
 final class Handler
 {
+    private bool $safeMode;
+    private ?string $extension;
+
     private function __construct(
-        private readonly bool $safeMode,
-        private readonly ?string $extension
+        bool $safeMode,
+        ?string $extension
     ) {
+        $this->safeMode = $safeMode;
+        $this->extension = $extension;
     }
 
     public static function directory(string $extension) : self

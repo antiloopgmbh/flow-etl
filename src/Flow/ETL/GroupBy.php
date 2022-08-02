@@ -21,7 +21,7 @@ final class GroupBy
     /**
      * @var array<string>
      */
-    private readonly array $entries;
+    private array $entries;
 
     /**
      * @var array<string, array{values?: array<string, mixed>, aggregators: array<Aggregator>}>

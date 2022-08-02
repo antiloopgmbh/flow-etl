@@ -12,8 +12,11 @@ use Flow\ETL\Row\Schema\Constraint;
  */
 final class SameAs implements Constraint
 {
-    public function __construct(private readonly $value)
+    private $value;
+
+    public function __construct($value)
     {
+        $this->value = $value;
     }
 
     public function __serialize() : array

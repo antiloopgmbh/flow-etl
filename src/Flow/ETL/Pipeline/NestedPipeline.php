@@ -12,10 +12,15 @@ use Flow\ETL\Transformer;
 
 final class NestedPipeline implements Pipeline
 {
+    private Pipeline $currentPipeline;
+    private Pipeline $nextPipeline;
+
     public function __construct(
-        private readonly Pipeline $currentPipeline,
-        private readonly Pipeline $nextPipeline
+        Pipeline $currentPipeline,
+        Pipeline $nextPipeline
     ) {
+        $this->currentPipeline = $currentPipeline;
+        $this->nextPipeline = $nextPipeline;
     }
 
     public function add(Loader|Transformer $pipe) : Pipeline

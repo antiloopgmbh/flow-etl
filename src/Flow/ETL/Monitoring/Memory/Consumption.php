@@ -6,7 +6,7 @@ namespace Flow\ETL\Monitoring\Memory;
 
 final class Consumption
 {
-    private readonly Unit $initial;
+    private Unit $initial;
 
     private Unit $max;
 

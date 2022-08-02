@@ -9,11 +9,14 @@ use Flow\ETL\Rows;
 
 final class CachedParts
 {
+    private array $generators;
+
     /**
      * @param array<string, \Generator<int, Rows, mixed, void>> $generators
      */
-    public function __construct(private readonly array $generators)
+    public function __construct(array $generators)
     {
+        $this->generators = $generators;
     }
 
     /**
