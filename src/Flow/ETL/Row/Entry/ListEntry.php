@@ -74,7 +74,9 @@ final class ListEntry implements Entry, TypedCollection
         return Definition::list(
             $this->name,
             $this->type,
-            metadata: Metadata::with(FlowMetadata::METADATA_LIST_ENTRY_TYPE, $this->type())
+            false,
+            null,
+            Metadata::with(FlowMetadata::METADATA_LIST_ENTRY_TYPE, $this->type())
         );
     }
 

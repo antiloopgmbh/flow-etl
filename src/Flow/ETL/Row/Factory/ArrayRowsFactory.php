@@ -52,7 +52,7 @@ final class ArrayRowsFactory implements RowsFactory
         }
 
         return (new RemoveEntriesTransformer('element'))->transform(
-            (new ArrayUnpackTransformer('element', entryFactory: new NativeEntryFactory($this->schema)))
+            (new ArrayUnpackTransformer('element', [], null, new NativeEntryFactory($this->schema)))
                 ->transform(new Rows(...\array_map(
                     fn (array $row) : Row => Row::create(new Row\Entry\ArrayEntry('element', $row)),
                     $data
