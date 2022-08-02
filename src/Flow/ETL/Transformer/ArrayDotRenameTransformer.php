@@ -49,7 +49,7 @@ final class ArrayDotRenameTransformer implements Transformer
                 $arrayEntry = $row->get($arrayKeyRename->arrayEntry());
 
                 if (!$arrayEntry instanceof Row\Entry\ArrayEntry) {
-                    $entryClass = $arrayEntry::class;
+                    $entryClass = get_class($arrayEntry);
 
                     throw new RuntimeException("{$arrayEntry->name()} is not ArrayEntry but {$entryClass}");
                 }

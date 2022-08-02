@@ -57,7 +57,7 @@ final class ArrayExpandTransformer implements Transformer
             $arrayEntry = $row->get($this->arrayEntryName);
 
             if (!$arrayEntry instanceof Row\Entry\ArrayEntry && !$arrayEntry instanceof Row\Entry\ListEntry) {
-                $entryClass = $arrayEntry::class;
+                $entryClass = get_class($arrayEntry);
 
                 throw new RuntimeException("{$this->arrayEntryName} is not ArrayEntry but {$entryClass}");
             }

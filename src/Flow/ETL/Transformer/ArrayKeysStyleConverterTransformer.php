@@ -68,7 +68,7 @@ final class ArrayKeysStyleConverterTransformer implements Transformer
             $arrayEntry = $row->get($this->arrayEntryName);
 
             if (!$arrayEntry instanceof Row\Entry\ArrayEntry) {
-                $entryClass = $arrayEntry::class;
+                $entryClass = get_class($arrayEntry);
 
                 throw new RuntimeException("{$this->arrayEntryName} is not ArrayEntry but {$entryClass}");
             }

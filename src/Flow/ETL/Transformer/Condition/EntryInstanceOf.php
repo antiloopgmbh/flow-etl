@@ -23,6 +23,6 @@ final class EntryInstanceOf implements RowCondition
             return false;
         }
 
-        return $row->entries()->get($this->entryName)::class === $this->class;
+        return $row->entries() === $this->class;
     }
 }
