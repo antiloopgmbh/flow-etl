@@ -12,8 +12,13 @@ use Flow\ETL\Tests\Fixtures\Enum\BackedStringEnum;
 
 final class AllRowTypesFakeExtractor implements Extractor
 {
-    public function __construct(private readonly int $total, private readonly int $rowsSize)
+    private int $total;
+    private int $rowsSize;
+
+    public function __construct(int $total, int $rowsSize)
     {
+        $this->total = $total;
+        $this->rowsSize = $rowsSize;
     }
 
     /**
@@ -53,7 +58,7 @@ final class AllRowTypesFakeExtractor implements Extractor
                         new Row\Entries(Entry::integer('item-id', 3), Entry::string('name', 'three'))
                     ),
                     Entry::object('object', new \ArrayIterator([1, 2, 3])),
-                    Entry::enum('enum', BackedStringEnum::three)
+                    Entry::enum('enum', BackedStringEnum::THREE)
                 );
             }
 

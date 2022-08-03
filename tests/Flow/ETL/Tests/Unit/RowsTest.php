@@ -565,9 +565,9 @@ final class RowsTest extends TestCase
     /**
      * @dataProvider unique_rows_provider
      */
-    public function test_rows_unique(Rows $expected, Rows $notUnique, Row\Comparator $comparator = new NativeComparator()) : void
+    public function test_rows_unique(Rows $expected, Rows $notUnique, Row\Comparator $comparator = null) : void
     {
-        $this->assertEquals($expected, $notUnique->unique($comparator));
+        $this->assertEquals($expected, $notUnique->unique($comparator ?? new NativeComparator()));
     }
 
     public function test_sort() : void

@@ -27,8 +27,11 @@ final class CacheSpy implements Cache
      */
     private array $writes = [];
 
-    public function __construct(private readonly Cache $cache)
+    private Cache $cache;
+
+    public function __construct(Cache $cache)
     {
+        $this->cache = $cache;
     }
 
     public function __serialize() : array

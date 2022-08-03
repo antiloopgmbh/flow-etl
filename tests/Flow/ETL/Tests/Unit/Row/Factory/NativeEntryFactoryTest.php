@@ -95,7 +95,7 @@ final class NativeEntryFactoryTest extends TestCase
     public function test_enum_with_schema() : void
     {
         $this->assertEquals(
-            Entry::enum('e', BackedIntEnum::one),
+            Entry::enum('e', BackedIntEnum::ONE),
             (new NativeEntryFactory(new Schema(Schema\Definition::enum('e', BackedIntEnum::class))))
                 ->create('e', 'one')
         );

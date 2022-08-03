@@ -13,8 +13,8 @@ final class HandlerTest extends TestCase
 {
     public function test_directory_handler() : void
     {
-        $resource = Handler::directory('json')
-            ->open(new LocalFile(\sys_get_temp_dir() . '/nested/directory'), Mode::WRITE);
+        $directory = Handler::directory('json');
+        $resource = $directory->open(new LocalFile(\sys_get_temp_dir() . '/nested/directory'), Mode::WRITE);
 
         $this->assertIsResource($resource);
 
@@ -35,7 +35,7 @@ final class HandlerTest extends TestCase
 
     public function test_file_handler() : void
     {
-        $resource = Handler::file()
+        $resource = (Handler::file())
             ->open(new LocalFile(\sys_get_temp_dir() . '/file.json'), Mode::WRITE);
 
         $this->assertIsResource($resource);

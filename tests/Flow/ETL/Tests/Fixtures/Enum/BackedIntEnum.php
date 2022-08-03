@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Tests\Fixtures\Enum;
 
-enum BackedIntEnum: int
+abstract class BackedIntEnum
 {
-    case one = 1;
-    case three = 3;
-    case two = 2;
+    const ONE = 1;
+    const THREE = 3;
+    const TWO = 2;
 }

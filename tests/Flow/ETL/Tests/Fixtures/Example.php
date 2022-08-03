@@ -8,7 +8,7 @@ final class Example
 {
     public int $foo = 1;
 
-    private readonly \DateTimeImmutable $bad;
+    private \DateTimeImmutable $bad;
 
     private int $bar = 2;
 

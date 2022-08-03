@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Tests\Fixtures\Enum;
 
-enum BasicEnum
+abstract class BasicEnum
 {
-    case one;
-    case three;
-    case two;
+    const ONE = 1;
+    const THREE = 3;
+    const TWO = 2;
 }

@@ -16,8 +16,8 @@ final class ASCIISchemaFormatterTest extends TestCase
     {
         $schema = new Schema(
             Schema\Definition::union('number', [IntegerEntry::class, FloatEntry::class]),
-            Schema\Definition::string('name', nullable: true),
-            Schema\Definition::array('tags', nullable: false),
+            Schema\Definition::string('name', true),
+            Schema\Definition::array('tags', false),
             Schema\Definition::boolean('active', false)
         );
 

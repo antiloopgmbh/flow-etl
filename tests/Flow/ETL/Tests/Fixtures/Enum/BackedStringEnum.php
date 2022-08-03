@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Tests\Fixtures\Enum;
 
-enum BackedStringEnum: string
+class BackedStringEnum
 {
-    case one = 'one';
-    case three = 'three';
-    case two = 'two';
+    const ONE = 'one';
+    const THREE = 'three';
+    const TWO = 'two';
 }

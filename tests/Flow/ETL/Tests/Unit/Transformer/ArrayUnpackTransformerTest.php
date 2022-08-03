@@ -19,7 +19,9 @@ final class ArrayUnpackTransformerTest extends TestCase
     {
         $arrayUnpackTransformer = Transform::array_unpack(
             'array_entry',
-            schema: new Row\Schema(Row\Schema\Definition::enum('enum', BackedIntEnum::class))
+            '',
+            [],
+            new Row\Schema(Row\Schema\Definition::enum('enum', BackedIntEnum::class))
         );
 
         $rows = (Transform::remove('array_entry'))->transform(
@@ -41,7 +43,7 @@ final class ArrayUnpackTransformerTest extends TestCase
         $this->assertEquals(
             new Rows(
                 Row::create(
-                    new Row\Entry\EnumEntry('enum', BackedIntEnum::one),
+                    new Row\Entry\EnumEntry('enum', BackedIntEnum::ONE),
                     new Row\Entry\IntegerEntry('id', 1)
                 ),
             ),

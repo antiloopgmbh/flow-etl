@@ -26,16 +26,31 @@ final class MathValueOperationTransformerTest extends TestCase
 
     /**
      * @dataProvider math_operations_provider
+     *
+     * @param int|float $rightValue
+     * @param int|float $result
      */
-    public function test_math_operations(Entry $leftEntry, int|float $rightValue, string $operation, int|float $result, string $resultClass) : void
+    public function test_math_operations(Entry $leftEntry, $rightValue, string $operation, $result, string $resultClass) : void
     {
-        $rows = match ($operation) {
-            Operation::ADD => Transform::add_value($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry))),
-            Operation::SUBTRACT => Transform::subtract_value($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry))),
-            Operation::DIVIDE => Transform::divide_by($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry))),
-            Operation::MULTIPLY => Transform::multiply_by($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry))),
-            Operation::MODULO => Transform::modulo_by($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry))),
-            Operation::POWER => Transform::power_of($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry))),
+        switch ($operation) {
+            case Operation::ADD:
+                $rows = Transform::add_value($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry)));
+                break;
+            case Operation::SUBTRACT:
+                $rows = Transform::subtract_value($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry)));
+                break;
+            case Operation::DIVIDE:
+                $rows = Transform::divide_by($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry)));
+                break;
+            case Operation::MULTIPLY:
+                $rows = Transform::multiply_by($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry)));
+                break;
+            case Operation::MODULO:
+                $rows = Transform::modulo_by($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry)));
+                break;
+            case Operation::POWER:
+                $rows = Transform::power_of($leftEntry->name(), $rightValue)->transform(new Rows(Row::create($leftEntry)));
+                break;
         };
 
         $this->assertSame(

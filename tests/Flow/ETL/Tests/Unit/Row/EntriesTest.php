@@ -382,7 +382,7 @@ final class EntriesTest extends TestCase
                 new IntegerEntry('item-id', 3),
                 new StringEntry('name', 'three')
             ),
-            new EnumEntry('enum', BasicEnum::three)
+            new EnumEntry('enum', BasicEnum::THREE)
         );
 
         $this->assertEquals(
@@ -399,7 +399,7 @@ final class EntriesTest extends TestCase
                     new IntegerEntry('item-id', 3),
                     new StringEntry('name', 'three'),
                 ],
-                'enum' => BasicEnum::three,
+                'enum' => BasicEnum::THREE,
             ],
             $entries->toArray()
         );
