@@ -84,6 +84,10 @@ final class NativeEntryFactory implements EntryFactory
         }
 
         if (\is_array($value)) {
+            if (!\count($value)) {
+                return new Row\Entry\ArrayEntry($entryName, $value);
+            }
+
             if (!ArrayUtils::arrayIsList($value)) {
                 return new Row\Entry\ArrayEntry($entryName, $value);
             }
