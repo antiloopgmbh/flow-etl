@@ -9,8 +9,6 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "flow-php/array-dot": "dev-php7.4-backport",
-        "symfony/polyfill-php80": "^1.26",
-        "symfony/polyfill-php81": "^1.26",
         "benmorel/weakmap-polyfill": "0.3.0",
         "ext-zlib": "*",
         "ext-bcmath": "*",

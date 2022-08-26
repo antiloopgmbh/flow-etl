@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Flow\ETL\Row\Entry\TypedCollection;
 
+use Flow\ArrayUtils;
 use Flow\ETL\Exception\InvalidArgumentException;
-use Symfony\PolyFill\Php81\Php81;
 
 /**
  * @psalm-immutable
@@ -42,7 +42,7 @@ final class ObjectType implements Type
 
     public function isValid(array $collection) : bool
     {
-        if (!Php81::array_is_list($collection)) {
+        if (!ArrayUtils::arrayIsList($collection)) {
             return false;
         }
 
